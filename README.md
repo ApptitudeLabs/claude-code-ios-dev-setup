@@ -1636,7 +1636,7 @@ This helps prevent merge conflicts in Xcode project files.
 
 ## 18. Best Practices & Tips
 
-> **📚 Recommended Reading:** For comprehensive iOS development best practices beyond Claude Code setup, see the [Infinum iOS Handbook](https://infinum.com/handbook/ios) which covers architecture patterns, testing strategies, CI/CD pipelines, and team workflows.
+> **📚 Recommended Reading:** For comprehensive iOS development best practices beyond Claude Code setup, see the [Infinum iOS Handbook](https://infinum.com/handbook/ios) which covers architecture patterns, testing strategies, and team workflows.
 
 ### Workflow Best Practices
 
