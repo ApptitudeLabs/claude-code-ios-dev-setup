@@ -302,16 +302,6 @@ claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequen
 - Multi-step migration planning
 - Algorithm design and optimization
 
-**Installation:**
-```bash
-claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
-```
-
-**Capabilities:**
-- Multi-step reasoning
-- Complex problem decomposition
-- Chain-of-thought processing
-
 ### Project-Level MCP Configuration
 
 Create `.mcp.json` in your project root:
@@ -397,10 +387,14 @@ git clone https://github.com/nexus-labs-automation/mobile-observability.git mobi
 # OpenSkills - CLI-based skill management compatible with Claude Code
 git clone https://github.com/numman-ali/openskills.git openskills
 
+# n-skills - Curated collection of production-ready agent skills
+git clone https://github.com/numman-ali/n-skills.git n-skills
+
 echo "✅ All skills installed!"
 echo ""
 echo "Additional CLI tools for skill management:"
 echo "  • OpenSkills CLI: Available at ~/.claude/skills/openskills"
+echo "  • n-skills: Curated collection at ~/.claude/skills/n-skills"
 echo "  • Agents CLI: npm install -g @wshobson/agents"
 ```
 
@@ -485,6 +479,45 @@ git clone https://github.com/nexus-labs-automation/mobile-observability.git mobi
 > Set up Firebase Analytics for this screen
 > Implement crash reporting with proper context
 > Add performance monitoring to track app launch time
+```
+
+### n-skills - Curated Production Skills
+
+**Source:** [numman-ali/n-skills](https://github.com/numman-ali/n-skills)
+
+**Installation:**
+```bash
+cd ~/.claude/skills/
+git clone https://github.com/numman-ali/n-skills.git n-skills
+```
+
+**What it is:**
+n-skills is a curated collection of production-ready agent skills that have been tested and refined for real-world use. Unlike general skill repositories, n-skills focuses on battle-tested patterns and workflows that have proven effective in professional development environments.
+
+**Key Features:**
+- **Production-Ready**: All skills are tested in real-world scenarios
+- **Well-Documented**: Each skill includes detailed usage examples
+- **iOS-Focused**: Many skills specifically target iOS/Swift development
+- **Active Maintenance**: Regularly updated with new patterns and fixes
+
+**Included Skill Categories:**
+- **Code Quality**: Linting, formatting, and code review workflows
+- **Testing Patterns**: Unit test generation, UI testing strategies
+- **Architecture**: MVVM, Clean Architecture, and modular design
+- **Performance**: Optimization techniques and profiling
+- **DevOps**: CI/CD integration, deployment automation
+
+**Example Skills:**
+- SwiftUI component generation with tests
+- API client generation from OpenAPI specs
+- Database migration strategies
+- Localization workflow automation
+
+**Usage:**
+Skills from n-skills activate automatically based on context, or you can reference them directly:
+```
+> Use the n-skills API client pattern to create a networking layer
+> Apply the n-skills testing strategy to this ViewModel
 ```
 
 ### OpenSkills CLI
@@ -610,6 +643,7 @@ Create `CLAUDE.md` in your project root:
 - **Swift Concurrency**: async/await, actors, Sendable compliance
 - **Dimillian's SwiftUI Components**: Reusable UI patterns
 - **Mobile Observability**: Analytics, crash reporting, monitoring
+- **n-skills**: Production-ready patterns and workflows
 - **OpenSkills**: Best practices and community standards
 
 ## Build Commands
@@ -1135,23 +1169,6 @@ SWIFT_UPCOMING_FEATURE_EXIST_ANY=YES
 SWIFT_UPCOMING_FEATURE_IMPLICIT_OPEN_EXISTENTIALS=YES
 ```
 
-**DerivedData on RAM Disk (macOS)**
-```bash
-# Create 4GB RAM disk (8388608 = 4GB in 512-byte blocks)
-diskutil erasevolume HFS+ "RamDisk" `hdiutil attach -nomount ram://8388608`
-
-# Or create 8GB for larger projects
-diskutil erasevolume HFS+ "RamDisk" `hdiutil attach -nomount ram://16777216`
-
-# Set in Xcode > Settings > Locations > DerivedData
-# Point to /Volumes/RamDisk
-
-# Add to ~/.zshrc to recreate on login:
-# if [ ! -d "/Volumes/RamDisk" ]; then
-#   diskutil erasevolume HFS+ "RamDisk" `hdiutil attach -nomount ram://8388608`
-# fi
-```
-
 **Xcode 15+ Specific Optimizations**
 ```bash
 # Enable explicit modules for faster incremental builds
@@ -1167,6 +1184,129 @@ INDEX_ENABLE_BUILD_ARENA=YES
 # Optimize asset catalog compilation
 ASSETCATALOG_COMPILER_OPTIMIZATION=space  # or 'time' for faster builds
 ```
+
+### EditorConfig for Xcode
+
+**Source:** [Pol Piella's Xcode EditorConfig Guide](https://www.polpiella.dev/xcode-editor-config/)
+
+EditorConfig provides consistent coding styles across different editors and IDEs, including Xcode (14.3+).
+
+**Installation:**
+Create `.editorconfig` in your project root:
+
+```ini
+# EditorConfig for iOS/Swift Projects
+# https://editorconfig.org
+
+root = true
+
+# All files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Swift files
+[*.swift]
+indent_style = space
+indent_size = 4
+max_line_length = 120
+
+# SwiftUI files (same as Swift)
+[*.swift]
+indent_style = space
+indent_size = 4
+
+# Xcode project files
+[*.{xcodeproj,xcworkspace}/**.pbxproj]
+indent_style = tab
+
+# YAML files
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_style = space
+indent_size = 2
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# Plist files
+[*.plist]
+indent_style = tab
+
+# Strings files
+[*.strings]
+indent_style = space
+indent_size = 2
+```
+
+**Key Benefits:**
+- **Automatic Formatting**: Xcode 14.3+ respects EditorConfig settings automatically
+- **Team Consistency**: All team members get the same formatting regardless of their Xcode settings
+- **Language-Specific**: Different rules for Swift, YAML, JSON, etc.
+- **Version Control Friendly**: Committed to repo, applies to all contributors
+
+**Xcode Integration:**
+- Xcode 14.3+ has built-in EditorConfig support
+- No plugins or extensions needed
+- Settings are applied automatically when opening files
+- Overrides local Xcode text editing preferences for files in the project
+
+**Common Settings Explained:**
+
+| Setting | Options | Description |
+|---------|---------|-------------|
+| `indent_style` | space, tab | Use spaces or tabs for indentation |
+| `indent_size` | number | Number of spaces per indent level |
+| `max_line_length` | number, off | Maximum line length (Xcode warns beyond this) |
+| `end_of_line` | lf, crlf, cr | Line ending style (lf = Unix/macOS) |
+| `charset` | utf-8, etc. | File character encoding |
+| `trim_trailing_whitespace` | true, false | Remove whitespace at end of lines |
+| `insert_final_newline` | true, false | Ensure file ends with newline |
+
+**Advanced Swift Configuration:**
+```ini
+# Swift files with strict formatting
+[*.swift]
+indent_style = space
+indent_size = 4
+max_line_length = 120
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Enforce consistent line endings
+end_of_line = lf
+
+# Match Swift API Design Guidelines spacing
+# (Xcode 15+ supports additional Swift-specific rules)
+```
+
+**Verification:**
+```bash
+# Check if EditorConfig is working
+# Open a Swift file in Xcode and check:
+# Xcode > Settings > Text Editing > Indentation
+# It should show "(using EditorConfig)" when active
+```
+
+**Integration with Other Tools:**
+EditorConfig works alongside:
+- SwiftLint (formatting rules)
+- swift-format (code formatting)
+- Xcode's built-in formatting (Ctrl+I)
+
+**Best Practices:**
+1. Commit `.editorconfig` to version control
+2. Keep settings consistent with your SwiftLint rules
+3. Document any project-specific deviations
+4. Review EditorConfig when onboarding new team members
 
 ### Xcode Settings (Preferences)
 
@@ -1316,16 +1456,6 @@ if which swift-format >/dev/null; then
 else
     echo "warning: swift-format not installed, run: brew install swift-format"
 fi
-```
-
-**Post-Build: Clean Old DerivedData**
-```bash
-#!/bin/bash
-# Clean DerivedData older than 7 days
-find ~/Library/Developer/Xcode/DerivedData \
-    -mindepth 1 -maxdepth 1 -type d \
-    -mtime +7 \
-    -exec rm -rf {} \;
 ```
 
 ### Swift-Format Configuration
@@ -1583,6 +1713,7 @@ MyiOSApp/
 │   ├── settings.json               # Team settings (committed)
 │   └── settings.local.json         # Personal settings (gitignored)
 ├── .mcp.json                        # MCP server configuration
+├── .editorconfig                    # EditorConfig for consistent formatting
 ├── CLAUDE.md                        # Main project context
 ├── docs/
 │   ├── PRD.md
@@ -1653,6 +1784,7 @@ This helps prevent merge conflicts in Xcode project files.
 3. **Leverage Agent Skills**
    - Swift Concurrency skill for async code
    - Mobile Observability for analytics
+   - n-skills for production-ready patterns
    - Skills activate automatically
 
 4. **Use MCP Servers Effectively**
@@ -1727,10 +1859,11 @@ rm -rf ~/.claude && claude
 - [ ] Install Claude Code CLI (native method)
 - [ ] Authenticate with Claude account
 - [ ] Install all essential MCP servers (run setup script)
-- [ ] Install community agent skills (Swift Concurrency, Dimillian, etc.)
+- [ ] Install community agent skills (Swift Concurrency, Dimillian, n-skills, etc.)
 - [ ] Create project `.claude/` directory structure
 - [ ] Create root `CLAUDE.md` with project context
 - [ ] Create `.mcp.json` with MCP server configuration
+- [ ] Create `.editorconfig` for consistent formatting
 - [ ] Create essential slash commands (build, test, run-app)
 - [ ] Set up hooks for Swift linting
 - [ ] Configure SwiftLint with `.swiftlint.yml`
@@ -1759,12 +1892,14 @@ rm -rf ~/.claude && claude
 - [AvdLee's Swift Concurrency Skill](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill)
 - [Dimillian's Skills Collection](https://github.com/Dimillian/Skills)
 - [Nexus Labs Mobile Observability](https://github.com/nexus-labs-automation/mobile-observability)
+- [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
 - [OpenSkills - CLI Tool](https://github.com/numman-ali/openskills) - CLI for managing skills
 - [Agents CLI](https://github.com/wshobson/agents) - CLI tool for agent skill management
 - [Agent Skills Registry](https://agent-skills.md/)
 
 ### Xcode & Development Workflow
 - [Make Xcode Great Again](https://khorbushko.github.io/article/2021/02/01/make-xCode-great-again.html) - Xcode performance optimization
+- [Xcode EditorConfig Setup](https://www.polpiella.dev/xcode-editor-config/) - Consistent formatting with EditorConfig
 - [Xcode and Git: Bridging the Gap](https://thoughtbot.com/blog/xcode-and-git-bridging-the-gap) - Git integration best practices for Xcode projects
 - [Infinum iOS Handbook](https://infinum.com/handbook/ios) - Comprehensive iOS development guide covering architecture, testing, CI/CD, and best practices
 
@@ -1786,6 +1921,8 @@ rm -rf ~/.claude && claude
 - [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency Skill
 - [Thomas Ricouard (Dimillian)](https://github.com/Dimillian) for Skills Collection
 - [Nexus Labs](https://github.com/nexus-labs-automation) for Mobile Observability
+- [Numan Ali](https://github.com/numman-ali) for n-skills and OpenSkills
+- [Pol Piella](https://www.polpiella.dev) for EditorConfig Xcode guide
 - [Oleksandr Khorbushko](https://khorbushko.github.io) for Xcode optimization guide
 - [thoughtbot](https://thoughtbot.com) for Xcode/Git integration guide
 - [Infinum](https://infinum.com) for comprehensive iOS handbook
