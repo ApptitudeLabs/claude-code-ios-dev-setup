@@ -624,7 +624,11 @@ A CLI tool for managing Claude Code agent skills, similar to OpenSkills. Provide
 
 ### Agent Skills Registry
 
-Browse more skills at: **[agent-skills.md](https://agent-skills.md/)**
+Browse and discover agent skills from multiple sources:
+
+**Primary Registries:**
+- **[agent-skills.md](https://agent-skills.md/)** - Community-driven skill marketplace
+- **[Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills)** - Curated collection of AI agent skills with categorized skills for various domains
 
 Search by technology (Swift, SwiftUI, iOS) and install with one command.
 
@@ -1958,6 +1962,7 @@ rm -rf ~/.claude && claude
 - [OpenSkills - CLI Tool](https://github.com/numman-ali/openskills) - CLI for managing skills
 - [Agents CLI](https://github.com/wshobson/agents) - CLI tool for agent skill management
 - [Agent Skills Registry](https://agent-skills.md/)
+- [Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills) - Curated AI agent skills collection
 
 ### Xcode & Development Workflow
 - [Make Xcode Great Again](https://khorbushko.github.io/article/2021/02/01/make-xCode-great-again.html) - Xcode performance optimization
@@ -1985,6 +1990,7 @@ rm -rf ~/.claude && claude
 - [Thomas Ricouard (Dimillian)](https://github.com/Dimillian) for Skills Collection
 - [Nexus Labs](https://github.com/nexus-labs-automation) for Mobile Observability
 - [Numan Ali](https://github.com/numman-ali) for n-skills and OpenSkills
+- [skillcreatorai](https://github.com/skillcreatorai) for Ai-Agent-Skills collection
 - [Pol Piella](https://www.polpiella.dev) for EditorConfig Xcode guide
 - [Oleksandr Khorbushko](https://khorbushko.github.io) for Xcode optimization guide
 - [thoughtbot](https://thoughtbot.com) for Xcode/Git integration guide
