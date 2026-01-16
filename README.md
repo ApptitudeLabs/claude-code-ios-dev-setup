@@ -132,8 +132,12 @@ Priority (Highest to Lowest):
 
 echo "🚀 Installing Essential MCP Servers..."
 
-# Core iOS Development
+# Core iOS Development - Choose one:
+# Option 1: XcodeBuildMCP (Recommended - Full featured)
 npx -y @smithery/cli@latest install cameroncooke/xcodebuildmcp --client claude-code
+
+# Option 2: xc-mcp (Alternative - Lightweight)
+# claude mcp add xc-mcp -- npx -y xc-mcp
 
 # Version Control
 claude mcp add github -- npx -y @modelcontextprotocol/server-github
@@ -166,7 +170,13 @@ claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem
 claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
 ```
 
-### XcodeBuildMCP (Essential for iOS)
+### Xcode MCP Servers
+
+There are two main MCP servers for Xcode integration. Choose based on your needs:
+
+#### XcodeBuildMCP (Recommended for Full Build Pipeline)
+
+**Source:** [cameroncooke/xcodebuildmcp](https://github.com/cameroncooke/XcodeBuildMCP)
 
 **Installation:**
 ```bash
@@ -177,13 +187,12 @@ npx -y @smithery/cli@latest install cameroncooke/xcodebuildmcp --client claude-c
 claude mcp add xcodebuild -- npx cameroncooke/xcodebuildmcp
 ```
 
-**Capabilities:**
-- Build iOS/macOS projects for simulator and device
-- Run unit and UI tests
-- Manage simulators (boot, list, screenshot)
-- Capture runtime logs
+**Best for:**
+- Complete build and test automation
+- CI/CD integration
+- Simulator management
+- Runtime log capture
 - Swift Package operations
-- Create new Xcode projects
 
 **Key Tools:**
 | Tool | Description |
@@ -199,6 +208,31 @@ claude mcp add xcodebuild -- npx cameroncooke/xcodebuildmcp
 | `mcp__xcodebuildmcp__swift_package_build` | Build Swift package |
 | `mcp__xcodebuildmcp__swift_package_test` | Run Swift package tests |
 | `mcp__xcodebuildmcp__clean` | Clean build products |
+
+#### xc-mcp (Alternative: Lightweight Xcode Integration)
+
+**Source:** [conorluddy/xc-mcp](https://github.com/conorluddy/xc-mcp)
+
+**Installation:**
+```bash
+# Via npm
+claude mcp add xc-mcp -- npx -y xc-mcp
+
+# Or add to .mcp.json
+```
+
+**Best for:**
+- Lightweight Xcode project interaction
+- Quick builds without full pipeline
+- Simpler setup for smaller projects
+- Alternative to XcodeBuildMCP
+
+**When to use which:**
+- **Use XcodeBuildMCP** for production projects with full CI/CD needs
+- **Use xc-mcp** for lighter-weight projects or as an alternative
+- **Can use both** but typically choose one to avoid conflicts
+
+> **Recommendation:** Start with **XcodeBuildMCP** for comprehensive iOS development. Try **xc-mcp** if you need a lighter alternative or want to experiment with different workflows.
 
 ### GitHub MCP
 
@@ -338,7 +372,34 @@ Create `.mcp.json` in your project root:
 }
 ```
 
-> **Tip:** Only include the MCP servers you actually use. Starting with just XcodeBuildMCP, GitHub, and Memory is recommended.
+**Alternative Configuration (using xc-mcp):**
+```json
+{
+  "mcpServers": {
+    "xc-mcp": {
+      "command": "npx",
+      "args": ["-y", "xc-mcp"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "claude-historian": {
+      "command": "npx",
+      "args": ["claude-historian-mcp"]
+    }
+  }
+}
+```
+
+> **Tip:** Only include the MCP servers you actually use. Starting with just one Xcode server (XcodeBuildMCP or xc-mcp), GitHub, and Memory is recommended.
 
 ### Managing MCP Servers
 
@@ -1880,6 +1941,7 @@ rm -rf ~/.claude && claude
 ### Official Documentation
 - [Claude Code Official Docs](https://code.claude.com/docs)
 - [XcodeBuildMCP GitHub](https://github.com/cameroncooke/XcodeBuildMCP)
+- [xc-mcp GitHub](https://github.com/conorluddy/xc-mcp)
 - [MCP Documentation](https://modelcontextprotocol.io)
 
 ### Apple Developer Resources
@@ -1918,6 +1980,7 @@ rm -rf ~/.claude && claude
 
 - [Anthropic](https://anthropic.com) for Claude Code CLI
 - [Cameron Cooke](https://github.com/cameroncooke) for XcodeBuildMCP
+- [Conor Luddy](https://github.com/conorluddy) for xc-mcp
 - [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency Skill
 - [Thomas Ricouard (Dimillian)](https://github.com/Dimillian) for Skills Collection
 - [Nexus Labs](https://github.com/nexus-labs-automation) for Mobile Observability
