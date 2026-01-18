@@ -632,6 +632,46 @@ Browse and discover agent skills from multiple sources:
 
 Search by technology (Swift, SwiftUI, iOS) and install with one command.
 
+### Claude Code Templates
+
+**Source:** [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)
+
+Ready-to-use project templates and configuration files for Claude Code, including:
+
+**What it provides:**
+- Pre-configured `.claude/` directory structures
+- Sample CLAUDE.md templates for various project types
+- Ready-to-use `.mcp.json` configurations
+- Common slash command collections
+- Sample hooks and automation scripts
+
+**How to use:**
+```bash
+# Clone the templates repository
+git clone https://github.com/davila7/claude-code-templates.git
+
+# Copy relevant templates to your project
+cp -r claude-code-templates/ios-app/.claude ./
+cp claude-code-templates/ios-app/CLAUDE.md ./
+
+# Customize for your specific needs
+```
+
+**Benefits:**
+- ✅ Jumpstart new projects with proven configurations
+- ✅ Learn best practices from working examples
+- ✅ Standardize setup across team projects
+- ✅ Reduce initial configuration time
+
+**Common Templates Available:**
+- iOS/Swift projects
+- Web applications
+- Backend services
+- Full-stack applications
+- Data science projects
+
+> **Tip:** Browse the templates to find iOS-specific configurations that complement the setup described in this guide.
+
 ### Creating Custom Skills
 
 Create `.claude/skills/my-custom-skill/SKILL.md`:
@@ -1961,6 +2001,7 @@ rm -rf ~/.claude && claude
 - [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
 - [OpenSkills - CLI Tool](https://github.com/numman-ali/openskills) - CLI for managing skills
 - [Agents CLI](https://github.com/wshobson/agents) - CLI tool for agent skill management
+- [Claude Code Templates](https://github.com/davila7/claude-code-templates) - Ready-to-use project templates and configurations
 - [Agent Skills Registry](https://agent-skills.md/)
 - [Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills) - Curated AI agent skills collection
 
@@ -1991,6 +2032,7 @@ rm -rf ~/.claude && claude
 - [Nexus Labs](https://github.com/nexus-labs-automation) for Mobile Observability
 - [Numan Ali](https://github.com/numman-ali) for n-skills and OpenSkills
 - [skillcreatorai](https://github.com/skillcreatorai) for Ai-Agent-Skills collection
+- [Carlos Davila](https://github.com/davila7) for Claude Code Templates
 - [Pol Piella](https://www.polpiella.dev) for EditorConfig Xcode guide
 - [Oleksandr Khorbushko](https://khorbushko.github.io) for Xcode optimization guide
 - [thoughtbot](https://thoughtbot.com) for Xcode/Git integration guide
