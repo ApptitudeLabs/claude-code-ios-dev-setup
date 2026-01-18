@@ -634,7 +634,8 @@ Search by technology (Swift, SwiftUI, iOS) and install with one command.
 
 ### Claude Code Templates
 
-**Source:** [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)
+**Source:** [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)  
+**Website:** [aitmpl.com/agents](https://www.aitmpl.com/agents)
 
 Ready-to-use project templates and configuration files for Claude Code, including:
 
@@ -644,9 +645,13 @@ Ready-to-use project templates and configuration files for Claude Code, includin
 - Ready-to-use `.mcp.json` configurations
 - Common slash command collections
 - Sample hooks and automation scripts
+- Browse templates visually at [aitmpl.com/agents](https://www.aitmpl.com/agents)
 
 **How to use:**
 ```bash
+# Browse templates on the website first
+# Visit: https://www.aitmpl.com/agents
+
 # Clone the templates repository
 git clone https://github.com/davila7/claude-code-templates.git
 
@@ -662,6 +667,7 @@ cp claude-code-templates/ios-app/CLAUDE.md ./
 - ✅ Learn best practices from working examples
 - ✅ Standardize setup across team projects
 - ✅ Reduce initial configuration time
+- ✅ Visual browsing of available templates
 
 **Common Templates Available:**
 - iOS/Swift projects
@@ -670,7 +676,7 @@ cp claude-code-templates/ios-app/CLAUDE.md ./
 - Full-stack applications
 - Data science projects
 
-> **Tip:** Browse the templates to find iOS-specific configurations that complement the setup described in this guide.
+> **Tip:** Browse [aitmpl.com/agents](https://www.aitmpl.com/agents) to preview templates before downloading. Look for iOS-specific configurations that complement the setup described in this guide.
 
 ### Creating Custom Skills
 
@@ -2002,6 +2008,7 @@ rm -rf ~/.claude && claude
 - [OpenSkills - CLI Tool](https://github.com/numman-ali/openskills) - CLI for managing skills
 - [Agents CLI](https://github.com/wshobson/agents) - CLI tool for agent skill management
 - [Claude Code Templates](https://github.com/davila7/claude-code-templates) - Ready-to-use project templates and configurations
+- [AI Templates](https://www.aitmpl.com/agents) - Visual browser for Claude Code templates
 - [Agent Skills Registry](https://agent-skills.md/)
 - [Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills) - Curated AI agent skills collection
 
