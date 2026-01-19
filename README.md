@@ -108,17 +108,20 @@ Priority (Highest to Lowest):
 
 | File | Scope | Git Status | Purpose |
 |------|-------|------------|---------|
-| `~/.claude/settings.json` | User | N/A | Global preferences |
+| `~/.claude.json` | User | N/A | User state, feature flags, project MCP configs |
+| `~/.claude/settings.json` | User | N/A | Global preferences, plugins, status line |
 | `~/.claude/CLAUDE.md` | User | N/A | Global instructions |
 | `~/.claude/skills/` | User | N/A | Personal Agent Skills |
 | `~/.claude/commands/` | User | N/A | Personal slash commands |
 | `.claude/settings.json` | Project | Committed | Team settings |
 | `.claude/settings.local.json` | Local | Gitignored | Personal overrides |
-| `.mcp.json` | Project | Committed | Shared MCP servers |
+| `.mcp.json` | Project | Committed | Project MCP servers (alternative) |
 | `CLAUDE.md` | Project | Committed | Main project context |
 | `.claude/skills/` | Project | Committed | Project Agent Skills |
 | `.claude/commands/` | Project | Committed | Project slash commands |
 | `.claude/agents/` | Project | Committed | Project subagents |
+
+**Note:** MCP servers are stored in `~/.claude.json` under the `projects` key, organized by project path. The `.mcp.json` file is an alternative project-level configuration method.
 
 ---
 
@@ -129,6 +132,7 @@ Priority (Highest to Lowest):
 ```bash
 #!/bin/bash
 # Complete MCP setup for iOS development
+# Note: Configuration stored in ~/.claude.json under projects key
 
 echo "🚀 Installing Essential MCP Servers..."
 
@@ -152,6 +156,9 @@ claude mcp add claude-historian-mcp -- npx claude-historian-mcp
 claude mcp list
 
 echo "✅ Essential MCP servers installed!"
+echo ""
+echo "Note: Configuration stored in ~/.claude.json"
+echo "For team projects, consider creating a .mcp.json file instead"
 echo ""
 echo "Optional servers for advanced use cases:"
 echo "  - Filesystem: Advanced file operations"
@@ -336,10 +343,33 @@ claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequen
 - Multi-step migration planning
 - Algorithm design and optimization
 
-### Project-Level MCP Configuration
+### MCP Server Configuration
 
-Create `.mcp.json` in your project root:
+MCP servers are automatically configured when you install them using `claude mcp add` or via Smithery. The configuration is stored in:
 
+**`~/.claude.json`** - Under the `projects` key, organized by project path:
+```json
+{
+  "projects": {
+    "/path/to/your/project": {
+      "mcpServers": {
+        "xcodebuildmcp": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@smithery/cli@latest", "run", "cameroncooke/xcodebuildmcp"]
+        },
+        "github": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@modelcontextprotocol/server-github"]
+        }
+      }
+    }
+  }
+}
+```
+
+**Alternative: `.mcp.json`** - Project-level configuration (committed to git):
 ```json
 {
   "mcpServers": {
@@ -352,54 +382,30 @@ Create `.mcp.json` in your project root:
         "XCODEBUILDMCP_DYNAMIC_TOOLS": "true",
         "XCODEBUILDMCP_ENABLED_WORKFLOWS": "simulator,device,project-discovery,swift-package"
       }
-    },
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
-      }
-    },
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"]
-    },
-    "claude-historian": {
-      "command": "npx",
-      "args": ["claude-historian-mcp"]
     }
   }
 }
 ```
 
-**Alternative Configuration (using xc-mcp):**
-```json
-{
-  "mcpServers": {
-    "xc-mcp": {
-      "command": "npx",
-      "args": ["-y", "xc-mcp"]
-    },
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
-      }
-    },
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"]
-    },
-    "claude-historian": {
-      "command": "npx",
-      "args": ["claude-historian-mcp"]
-    }
-  }
-}
+**When to use which:**
+
+| Method | Storage | Committed | Best For |
+|--------|---------|-----------|----------|
+| `claude mcp add` | `~/.claude.json` | No | Personal setup, quick testing |
+| `.mcp.json` | Project root | Yes | Team collaboration, consistent setup |
+
+**Recommended Approach:**
+- **Personal/Testing**: Use `claude mcp add` commands (stored in `~/.claude.json`)
+- **Team Projects**: Create `.mcp.json` in project root for consistent team setup
+- `.mcp.json` settings override `~/.claude.json` for that project
+
+**Configuration Priority:**
+```
+1. Project .mcp.json (highest - team configuration)
+2. ~/.claude.json projects[path].mcpServers (personal per-project)
 ```
 
-> **Tip:** Only include the MCP servers you actually use. Starting with just one Xcode server (XcodeBuildMCP or xc-mcp), GitHub, and Memory is recommended.
+> **Tip:** Use `claude mcp list` to see all configured servers and their sources. Servers can be managed via `/mcp` command during a session.
 
 ### Managing MCP Servers
 
@@ -456,7 +462,6 @@ echo ""
 echo "Additional CLI tools for skill management:"
 echo "  • OpenSkills CLI: Available at ~/.claude/skills/openskills"
 echo "  • n-skills: Curated collection at ~/.claude/skills/n-skills"
-echo "  • Agents CLI: npm install -g @wshobson/agents"
 ```
 
 ### Swift Concurrency Agent Skill
@@ -600,57 +605,77 @@ OpenSkills is a CLI-based skill management system that closely matches Claude Co
 - Community-driven skill marketplace
 - Easy skill sharing and distribution
 
-### Agents CLI
+### Agents Plugin System
 
 **Source:** [wshobson/agents](https://github.com/wshobson/agents)
 
-**Installation:**
-```bash
-# Install the CLI tool
-npm install -g @wshobson/agents
+**What it is:**
+A plugin-based system for Claude Code that provides modular agents, commands, and skills. Unlike traditional CLI tools or monolithic repositories, Agents uses isolated plugins where each plugin is completely self-contained.
 
-# Or use npx
-npx @wshobson/agents
+**How It Works:**
+Each plugin is completely isolated with its own agents, commands, and skills:
+- **Install only what you need** - Each plugin loads only its specific agents, commands, and skills
+- **Minimal token usage** - No unnecessary resources loaded into context (~300 tokens per plugin)
+- **Mix and match** - Compose multiple plugins for complex workflows
+- **Clear boundaries** - Each plugin has a single, focused purpose
+- **Progressive disclosure** - Skills load knowledge only when activated
+
+**Example:** Installing `python-development` loads 3 Python agents, 1 scaffolding tool, and makes 5 skills available (~300 tokens), not the entire marketplace.
+
+**Installation & Usage:**
+```bash
+# Add the marketplace to Claude Code
+/plugin marketplace add wshobson/agents
+
+# Browse available plugins
+/plugin list
+
+# Install specific plugins
+/plugin install python-development
+/plugin install swift-development  # If available for iOS
 ```
 
-**What it is:**
-A CLI tool for managing Claude Code agent skills, similar to OpenSkills. Provides commands for discovering, installing, and managing agent skills from various sources.
+**Benefits:**
+- ✅ **Token Efficient**: Only ~300 tokens per plugin vs thousands for entire marketplace
+- ✅ **Focused**: Each plugin does one thing well
+- ✅ **Composable**: Combine multiple plugins for complex workflows
+- ✅ **Progressive**: Skills load only when activated
+- ✅ **Integrated**: Works directly within Claude Code via `/plugin` commands
 
-**Capabilities:**
-- Command-line interface for skill management
-- Browse and install skills from repositories
-- Manage local skill collections
-- Compatible with Claude Code skills format
+> **Note:** This is a plugin system for Claude Code, not a standalone CLI tool. It integrates directly into your Claude Code workflow.
 
-### Agent Skills Registry
+### Agent Skills & Templates Marketplaces
 
-Browse and discover agent skills from multiple sources:
+Discover and download agent skills and templates from these marketplaces:
 
-**Primary Registries:**
-- **[agent-skills.md](https://agent-skills.md/)** - Community-driven skill marketplace
-- **[Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills)** - Curated collection of AI agent skills with categorized skills for various domains
+**Primary Marketplaces:**
 
-Search by technology (Swift, SwiftUI, iOS) and install with one command.
+1. **[AI Templates - aitmpl.com/agents](https://www.aitmpl.com/agents)**
+   - Visual browser for Claude Code templates
+   - Ready-to-use project configurations
+   - Pre-built `.claude/` directory structures
+   - Browse before downloading
 
-### Claude Code Templates
+2. **[Agent Skills Registry - agent-skills.md](https://agent-skills.md/)**
+   - Community-driven skill marketplace
+   - Search by technology (Swift, SwiftUI, iOS)
+   - One-command installation
+   - Wide variety of domains
 
-**Source:** [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)  
-**Website:** [aitmpl.com/agents](https://www.aitmpl.com/agents)
+3. **[Skill Creator AI - skillcreator.ai/explore](https://www.skillcreator.ai/explore)**
+   - AI-powered skill discovery
+   - Explore curated agent skills
+   - Browse by category and use case
+   - Community contributions
 
-Ready-to-use project templates and configuration files for Claude Code, including:
+**GitHub Repositories:**
+- **[claude-code-templates](https://github.com/davila7/claude-code-templates)** - Template source files
+- **[Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills)** - Curated skills collection
 
-**What it provides:**
-- Pre-configured `.claude/` directory structures
-- Sample CLAUDE.md templates for various project types
-- Ready-to-use `.mcp.json` configurations
-- Common slash command collections
-- Sample hooks and automation scripts
-- Browse templates visually at [aitmpl.com/agents](https://www.aitmpl.com/agents)
-
-**How to use:**
+**How to use templates:**
 ```bash
 # Browse templates on the website first
-# Visit: https://www.aitmpl.com/agents
+# Visit: https://www.aitmpl.com/agents or https://agent-skills.md/
 
 # Clone the templates repository
 git clone https://github.com/davila7/claude-code-templates.git
@@ -669,14 +694,7 @@ cp claude-code-templates/ios-app/CLAUDE.md ./
 - ✅ Reduce initial configuration time
 - ✅ Visual browsing of available templates
 
-**Common Templates Available:**
-- iOS/Swift projects
-- Web applications
-- Backend services
-- Full-stack applications
-- Data science projects
-
-> **Tip:** Browse [aitmpl.com/agents](https://www.aitmpl.com/agents) to preview templates before downloading. Look for iOS-specific configurations that complement the setup described in this guide.
+> **Tip:** Start by browsing the visual marketplaces to preview available skills and templates before downloading. Look for iOS-specific configurations that complement the setup described in this guide.
 
 ### Creating Custom Skills
 
@@ -2006,11 +2024,14 @@ rm -rf ~/.claude && claude
 - [Nexus Labs Mobile Observability](https://github.com/nexus-labs-automation/mobile-observability)
 - [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
 - [OpenSkills - CLI Tool](https://github.com/numman-ali/openskills) - CLI for managing skills
-- [Agents CLI](https://github.com/wshobson/agents) - CLI tool for agent skill management
-- [Claude Code Templates](https://github.com/davila7/claude-code-templates) - Ready-to-use project templates and configurations
+- [Agents Plugin System](https://github.com/wshobson/agents) - Modular plugin system for Claude Code
+
+### Marketplaces & Registries
 - [AI Templates](https://www.aitmpl.com/agents) - Visual browser for Claude Code templates
-- [Agent Skills Registry](https://agent-skills.md/)
-- [Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills) - Curated AI agent skills collection
+- [Agent Skills Registry](https://agent-skills.md/) - Community skill marketplace with search
+- [Skill Creator AI](https://www.skillcreator.ai/explore) - AI-powered skill discovery and exploration
+- [Claude Code Templates](https://github.com/davila7/claude-code-templates) - Template repository (GitHub)
+- [Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills) - Curated skills repository (GitHub)
 
 ### Xcode & Development Workflow
 - [Make Xcode Great Again](https://khorbushko.github.io/article/2021/02/01/make-xCode-great-again.html) - Xcode performance optimization
