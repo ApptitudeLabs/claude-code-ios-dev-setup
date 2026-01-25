@@ -708,8 +708,10 @@ Discover and download agent skills and templates from these marketplaces:
 **Primary Marketplaces:**
 
 1. **[Skills.sh - skills.sh](https://skills.sh/)**
-   - **NEW**: Official Vercel package manager for AI agent skills
-   - Install with `npx add-skill <package>` (like npm for skills)
+   - **NEW**: Official Vercel package manager ecosystem for AI agent skills
+   - Two installation tools available:
+     - **`npx skills add`** - Lighter CLI by Vercel
+     - **`npx add-skill`** - Full-featured open-source CLI ([GitHub](https://github.com/vercel-labs/add-skill))
    - Quality-curated skills with leaderboard
    - 20,000+ installs within days of launch
    - Cross-platform: Claude Code, Cursor, Codex, Copilot, and more
@@ -741,13 +743,17 @@ Discover and download agent skills and templates from these marketplaces:
 ```bash
 # Method 1: Skills.sh (Package Manager - NEW!)
 # Install Vercel's official React/Next.js skills
+
+# Option A: Using 'skills' CLI (lighter-weight)
+npx skills add vercel-labs/agent-skills
+# OR short syntax:
+npx skills i vercel-labs/agent-skills
+
+# Option B: Using 'add-skill' CLI (full-featured, open-source)
 npx add-skill vercel-labs/agent-skills
 
-# Install specific skill
-npx add-skill vercel-labs/agent-skills --skill react-best-practices
-
-# List available skills in a repo
-npx add-skill vercel-labs/agent-skills --list
+# Both tools install from skills.sh ecosystem
+# Choose based on your preference
 
 # Method 2: Browse and Clone
 # Browse templates on the website first
