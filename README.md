@@ -436,6 +436,59 @@ claude mcp remove XcodeBuildMCP
 
 Agent Skills are automatically invoked by Claude based on context. Install community skills to enhance Claude's capabilities.
 
+### Featured: Everything Claude Code (All-in-One Solution)
+
+**Source:** [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) ⭐ **27.4K stars**
+
+**What it is:**
+Complete Claude Code configuration collection from an **Anthropic hackathon winner**. Battle-tested over 10+ months of intensive daily use building real products. This is the most comprehensive, production-ready collection of Claude Code configurations available.
+
+**What's included:**
+- **9 Specialized Agents**: Planner, Architect, TDD Guide, Code Reviewer, Security Reviewer, Build Error Resolver, E2E Runner, Refactor Cleaner, Doc Updater
+- **11 Skills**: Coding standards, backend patterns, frontend patterns, continuous learning, and more
+- **11 Commands**: /plan, /review, /test, and other workflow automations
+- **10 Hooks**: Automated workflows for common development tasks
+- **MCP Configurations**: Pre-configured MCP servers
+- **Memory Persistence**: Context survives across sessions
+- **Strategic Compaction**: Control when context compacts
+- **Continuous Learning**: Auto-extract patterns from your sessions
+
+**Installation (Recommended - Plugin Method):**
+```bash
+# Add as marketplace and install as plugin
+/plugin marketplace add affaan-m/everything-claude-code
+/plugin install everything-claude-code@everything-claude-code
+```
+
+**Alternative (Manual Installation):**
+```bash
+# Clone and copy components
+git clone https://github.com/affaan-m/everything-claude-code.git
+cp everything-claude-code/agents/*.md ~/.claude/agents/
+cp everything-claude-code/commands/*.md ~/.claude/commands/
+cp -r everything-claude-code/skills/* ~/.claude/skills/
+# See repo for hooks and MCP configurations
+```
+
+**Why use this:**
+- ✅ **Production-Proven**: Built while shipping real products
+- ✅ **Comprehensive**: Everything you need in one place
+- ✅ **Well-Documented**: Shorthand and longform guides included
+- ✅ **Active Development**: Regular updates and community contributions
+- ✅ **Cross-Platform**: Works on Windows, macOS, Linux
+
+**Documentation:**
+- [Shorthand Guide](https://github.com/affaan-m/everything-claude-code) (Start here)
+- [Longform Guide](https://github.com/affaan-m/everything-claude-code) (Advanced topics)
+
+> **Recommendation for iOS Developers:** Install this plugin to get a complete, battle-tested workflow. Then customize the agents/skills for iOS-specific patterns using the individual skills below.
+
+---
+
+### Individual Community Skills
+
+If you prefer to pick and choose specific skills rather than the all-in-one solution above:
+
 ### Quick Installation
 
 ```bash
@@ -2049,6 +2102,7 @@ rm -rf ~/.claude && claude
 - [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
 - [OpenSkills - CLI Tool](https://github.com/numman-ali/openskills) - CLI for managing skills
 - [Agents Plugin System](https://github.com/wshobson/agents) - Modular plugin system for Claude Code
+- [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) - ⭐ **Complete all-in-one configuration from Anthropic hackathon winner**
 
 ### Marketplaces & Registries
 - [Skills.sh](https://skills.sh/) - Official Vercel package manager for AI agent skills (NEW!)
@@ -2079,6 +2133,7 @@ rm -rf ~/.claude && claude
 ## Acknowledgments
 
 - [Anthropic](https://anthropic.com) for Claude Code CLI
+- [Affaan Mustafa](https://github.com/affaan-m) for Everything Claude Code - comprehensive configuration collection
 - [Vercel](https://vercel.com) for Skills.sh and agent skills ecosystem
 - [Cameron Cooke](https://github.com/cameroncooke) for XcodeBuildMCP
 - [Conor Luddy](https://github.com/conorluddy) for xc-mcp
