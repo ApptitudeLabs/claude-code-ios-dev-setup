@@ -502,6 +502,9 @@ cd "$SKILLS_DIR"
 # Swift Concurrency Skill
 git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
 
+# SwiftUI Skill
+git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
+
 # Dimillian's Skills Collection
 git clone https://github.com/Dimillian/Skills.git dimillian-skills
 
@@ -553,6 +556,48 @@ Claude automatically uses this skill when:
 > Fix these Swift 6 concurrency warnings in my ViewModel
 > Review this actor implementation for thread safety issues
 ```
+
+### SwiftUI Agent Skill
+
+**Source:** [AvdLee/SwiftUI-Agent-Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill)
+
+**Installation:**
+```bash
+cd ~/.claude/skills/
+git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
+```
+
+**Capabilities:**
+- Modern SwiftUI patterns and best practices
+- State management (@State, @Binding, @Observable, @Environment)
+- View composition and reusability
+- Navigation (NavigationStack, NavigationPath)
+- Animations and transitions
+- Performance optimization
+- Accessibility implementation
+- iOS 17+ features (Observable macro, #Preview)
+
+**Automatic Activation:**
+Claude automatically uses this skill when:
+- Building SwiftUI views and components
+- Implementing state management
+- Creating navigation flows
+- Adding animations
+- Optimizing SwiftUI performance
+
+**Example Usage:**
+```
+> Create a SwiftUI view with proper state management using @Observable
+> Implement navigation between these three screens
+> Add smooth animations to this button interaction
+> Optimize this List view for better performance
+```
+
+**Why use this:**
+- ✅ **Expert Knowledge**: Created by Antoine van der Lee (SwiftLee)
+- ✅ **Modern Patterns**: Focuses on latest SwiftUI APIs (iOS 17+)
+- ✅ **Non-Opinionated**: Best practices without forcing specific architectures
+- ✅ **Complements Swift Concurrency Skill**: Works great together for complete coverage
 
 ### Dimillian's Skills Collection
 
@@ -2070,7 +2115,7 @@ rm -rf ~/.claude && claude
 - [ ] Install Claude Code CLI (native method)
 - [ ] Authenticate with Claude account
 - [ ] Install all essential MCP servers (run setup script)
-- [ ] Install community agent skills (Swift Concurrency, Dimillian, n-skills, etc.)
+- [ ] Install community agent skills (Swift Concurrency, SwiftUI, Dimillian, n-skills, etc.)
 - [ ] Create project `.claude/` directory structure
 - [ ] Create root `CLAUDE.md` with project context
 - [ ] Create `.mcp.json` with MCP server configuration
@@ -2102,7 +2147,8 @@ rm -rf ~/.claude && claude
 - [Swift Concurrency Guide](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
 
 ### Community Skills & Tools
-- [AvdLee's Swift Concurrency Skill](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill)
+- [AvdLee's Swift Concurrency Skill](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill) - Expert Swift Concurrency guidance
+- [AvdLee's SwiftUI Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill) - Modern SwiftUI patterns and best practices
 - [Dimillian's Skills Collection](https://github.com/Dimillian/Skills)
 - [Nexus Labs Mobile Observability](https://github.com/nexus-labs-automation/mobile-observability)
 - [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
@@ -2143,7 +2189,7 @@ rm -rf ~/.claude && claude
 - [Vercel](https://vercel.com) for Skills.sh and agent skills ecosystem
 - [Cameron Cooke](https://github.com/cameroncooke) for XcodeBuildMCP
 - [Conor Luddy](https://github.com/conorluddy) for xc-mcp
-- [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency Skill
+- [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency Skill and SwiftUI Skill
 - [Thomas Ricouard (Dimillian)](https://github.com/Dimillian) for Skills Collection
 - [Nexus Labs](https://github.com/nexus-labs-automation) for Mobile Observability
 - [Numan Ali](https://github.com/numman-ali) for n-skills and OpenSkills
