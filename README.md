@@ -146,8 +146,10 @@ npx -y @smithery/cli@latest install cameroncooke/xcodebuildmcp --client claude-c
 # Version Control
 claude mcp add github -- npx -y @modelcontextprotocol/server-github
 
-# Memory & Context
+# Memory & Context (Choose one)
 claude mcp add memory -- npx -y @modelcontextprotocol/server-memory
+# OR for advanced memory features:
+# claude mcp add memory-keeper -- npx -y mcp-memory-keeper
 
 # History
 claude mcp add claude-historian-mcp -- npx claude-historian-mcp
@@ -288,6 +290,8 @@ claude mcp add memory -- npx -y @modelcontextprotocol/server-memory
 > What architecture pattern did we decide on?
 > Store this: We always use Swift 6 strict concurrency
 ```
+
+> **Note:** For more advanced memory and history tracking, see **Claude Historian MCP** below, which provides conversation history search and timeline features.
 
 ### Claude Historian MCP
 
@@ -650,19 +654,27 @@ Discover and download agent skills and templates from these marketplaces:
 
 **Primary Marketplaces:**
 
-1. **[AI Templates - aitmpl.com/agents](https://www.aitmpl.com/agents)**
+1. **[Skills.sh - skills.sh](https://skills.sh/)**
+   - **NEW**: Official Vercel package manager for AI agent skills
+   - Install with `npx add-skill <package>` (like npm for skills)
+   - Quality-curated skills with leaderboard
+   - 20,000+ installs within days of launch
+   - Cross-platform: Claude Code, Cursor, Codex, Copilot, and more
+   - **Note for iOS**: Primarily web/React/Next.js focused, but useful if you do full-stack
+
+2. **[AI Templates - aitmpl.com/agents](https://www.aitmpl.com/agents)**
    - Visual browser for Claude Code templates
    - Ready-to-use project configurations
    - Pre-built `.claude/` directory structures
    - Browse before downloading
 
-2. **[Agent Skills Registry - agent-skills.md](https://agent-skills.md/)**
+3. **[Agent Skills Registry - agent-skills.md](https://agent-skills.md/)**
    - Community-driven skill marketplace
    - Search by technology (Swift, SwiftUI, iOS)
    - One-command installation
    - Wide variety of domains
 
-3. **[Skill Creator AI - skillcreator.ai/explore](https://www.skillcreator.ai/explore)**
+4. **[Skill Creator AI - skillcreator.ai/explore](https://www.skillcreator.ai/explore)**
    - AI-powered skill discovery
    - Explore curated agent skills
    - Browse by category and use case
@@ -672,8 +684,19 @@ Discover and download agent skills and templates from these marketplaces:
 - **[claude-code-templates](https://github.com/davila7/claude-code-templates)** - Template source files
 - **[Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills)** - Curated skills collection
 
-**How to use templates:**
+**How to use templates and skills:**
 ```bash
+# Method 1: Skills.sh (Package Manager - NEW!)
+# Install Vercel's official React/Next.js skills
+npx add-skill vercel-labs/agent-skills
+
+# Install specific skill
+npx add-skill vercel-labs/agent-skills --skill react-best-practices
+
+# List available skills in a repo
+npx add-skill vercel-labs/agent-skills --list
+
+# Method 2: Browse and Clone
 # Browse templates on the website first
 # Visit: https://www.aitmpl.com/agents or https://agent-skills.md/
 
@@ -2011,6 +2034,7 @@ rm -rf ~/.claude && claude
 - [XcodeBuildMCP GitHub](https://github.com/cameroncooke/XcodeBuildMCP)
 - [xc-mcp GitHub](https://github.com/conorluddy/xc-mcp)
 - [MCP Documentation](https://modelcontextprotocol.io)
+- [Memory Keeper MCP](https://github.com/mkreyman/mcp-memory-keeper) - Advanced memory system
 
 ### Apple Developer Resources
 - [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
@@ -2027,11 +2051,13 @@ rm -rf ~/.claude && claude
 - [Agents Plugin System](https://github.com/wshobson/agents) - Modular plugin system for Claude Code
 
 ### Marketplaces & Registries
+- [Skills.sh](https://skills.sh/) - Official Vercel package manager for AI agent skills (NEW!)
 - [AI Templates](https://www.aitmpl.com/agents) - Visual browser for Claude Code templates
 - [Agent Skills Registry](https://agent-skills.md/) - Community skill marketplace with search
 - [Skill Creator AI](https://www.skillcreator.ai/explore) - AI-powered skill discovery and exploration
 - [Claude Code Templates](https://github.com/davila7/claude-code-templates) - Template repository (GitHub)
 - [Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills) - Curated skills repository (GitHub)
+- [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) - Official Vercel skills (React/Next.js focused)
 
 ### Xcode & Development Workflow
 - [Make Xcode Great Again](https://khorbushko.github.io/article/2021/02/01/make-xCode-great-again.html) - Xcode performance optimization
@@ -2053,6 +2079,7 @@ rm -rf ~/.claude && claude
 ## Acknowledgments
 
 - [Anthropic](https://anthropic.com) for Claude Code CLI
+- [Vercel](https://vercel.com) for Skills.sh and agent skills ecosystem
 - [Cameron Cooke](https://github.com/cameroncooke) for XcodeBuildMCP
 - [Conor Luddy](https://github.com/conorluddy) for xc-mcp
 - [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency Skill
