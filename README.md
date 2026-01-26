@@ -752,8 +752,19 @@ Discover and download agent skills and templates from these marketplaces:
 
 **Primary Marketplaces:**
 
-1. **[Skills.sh - skills.sh](https://skills.sh/)**
-   - **NEW**: Official Vercel package manager ecosystem for AI agent skills
+1. **[SkillsMP - skillsmp.com](https://skillsmp.com/)** ⭐
+   - **71,000+ agent skills** - Largest marketplace by far
+   - **AI semantic search** - Find skills by natural language, not just keywords
+   - **22+ categories** organized by SDLC phase (Development, Testing, DevOps, etc.)
+   - **Quality filters** - Filter by stars (min 2★), maintenance status, popularity
+   - **marketplace.json support** - One-command `/plugin install` for compatible skills
+   - **Auto-synced with GitHub** - Continuously updated with latest community skills
+   - **Compatible with**: Claude Code, Codex CLI, ChatGPT (SKILL.md standard)
+   - **Independent community project** - Aggregates skills from public GitHub repos
+   - **Why it's #1**: Best discoverability with smart search + massive collection
+
+2. **[Skills.sh - skills.sh](https://skills.sh/)**
+   - **Official Vercel** package manager ecosystem for AI agent skills
    - Two installation tools available:
      - **`npx skills add`** - Lighter CLI by Vercel
      - **`npx add-skill`** - Full-featured open-source CLI ([GitHub](https://github.com/vercel-labs/add-skill))
@@ -762,19 +773,19 @@ Discover and download agent skills and templates from these marketplaces:
    - Cross-platform: Claude Code, Cursor, Codex, Copilot, and more
    - **Note for iOS**: Primarily web/React/Next.js focused, but useful if you do full-stack
 
-2. **[AI Templates - aitmpl.com/agents](https://www.aitmpl.com/agents)**
+3. **[AI Templates - aitmpl.com/agents](https://www.aitmpl.com/agents)**
    - Visual browser for Claude Code templates
    - Ready-to-use project configurations
    - Pre-built `.claude/` directory structures
    - Browse before downloading
 
-3. **[Agent Skills Registry - agent-skills.md](https://agent-skills.md/)**
+4. **[Agent Skills Registry - agent-skills.md](https://agent-skills.md/)**
    - Community-driven skill marketplace
    - Search by technology (Swift, SwiftUI, iOS)
    - One-command installation
    - Wide variety of domains
 
-4. **[Skill Creator AI - skillcreator.ai/explore](https://www.skillcreator.ai/explore)**
+5. **[Skill Creator AI - skillcreator.ai/explore](https://www.skillcreator.ai/explore)**
    - AI-powered skill discovery
    - Explore curated agent skills
    - Browse by category and use case
@@ -786,7 +797,23 @@ Discover and download agent skills and templates from these marketplaces:
 
 **How to use templates and skills:**
 ```bash
-# Method 1: Skills.sh (Package Manager - NEW!)
+# Method 1: SkillsMP.com - AI-Powered Discovery (RECOMMENDED)
+# Visit https://skillsmp.com/ and use AI semantic search
+# Example searches:
+#   - "SwiftUI navigation patterns"
+#   - "iOS networking with Combine"
+#   - "Swift Concurrency best practices"
+
+# Once you find a skill, install it:
+# Option A: Using /plugin install (if skill has marketplace.json)
+# Example: /plugin install skill-name@marketplace-name
+
+# Option B: Manual installation from GitHub
+# Copy the GitHub URL from SkillsMP and clone:
+cd ~/.claude/skills/
+git clone https://github.com/author/skill-name.git
+
+# Method 2: Skills.sh (Package Manager)
 # Install Vercel's official React/Next.js skills
 
 # Option A: Using 'skills' CLI (lighter-weight)
@@ -800,7 +827,7 @@ npx add-skill vercel-labs/agent-skills
 # Both tools install from skills.sh ecosystem
 # Choose based on your preference
 
-# Method 2: Browse and Clone
+# Method 3: Browse and Clone from Other Marketplaces
 # Browse templates on the website first
 # Visit: https://www.aitmpl.com/agents or https://agent-skills.md/
 
@@ -820,8 +847,9 @@ cp claude-code-templates/ios-app/CLAUDE.md ./
 - ✅ Standardize setup across team projects
 - ✅ Reduce initial configuration time
 - ✅ Visual browsing of available templates
+- ✅ AI-powered discovery on SkillsMP (71K+ skills searchable by natural language)
 
-> **Tip:** Start by browsing the visual marketplaces to preview available skills and templates before downloading. Look for iOS-specific configurations that complement the setup described in this guide.
+> **Tip:** Start with SkillsMP.com's AI semantic search to find exactly what you need from 71,000+ skills. Use natural language queries like "iOS unit testing patterns" instead of just keywords. Filter by quality (stars) and maintenance status to find actively maintained skills.
 
 ### Creating Custom Skills
 
@@ -2157,7 +2185,8 @@ rm -rf ~/.claude && claude
 - [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) - ⭐ **Complete all-in-one configuration from Anthropic hackathon winner**
 
 ### Marketplaces & Registries
-- [Skills.sh](https://skills.sh/) - Official Vercel package manager for AI agent skills (NEW!)
+- [SkillsMP](https://skillsmp.com/) - ⭐ **71,000+ skills with AI semantic search** (LARGEST marketplace)
+- [Skills.sh](https://skills.sh/) - Official Vercel package manager for AI agent skills
 - [AI Templates](https://www.aitmpl.com/agents) - Visual browser for Claude Code templates
 - [Agent Skills Registry](https://agent-skills.md/) - Community skill marketplace with search
 - [Skill Creator AI](https://www.skillcreator.ai/explore) - AI-powered skill discovery and exploration
