@@ -436,6 +436,53 @@ claude mcp remove XcodeBuildMCP
 
 Agent Skills are automatically invoked by Claude based on context. Install community skills to enhance Claude's capabilities.
 
+### Featured: Axiom iOS Development Skills
+
+**Source:** [Axiom Documentation](https://charleswiltgen.github.io/Axiom/) | [GitHub](https://github.com/charleswiltgen/Axiom)
+
+**What it is:**
+A comprehensive suite of 50+ specialized iOS development skills for Claude Code. Axiom provides deep expertise across the entire iOS development lifecycle with automated auditors, analyzers, and implementation helpers.
+
+**Key Capabilities:**
+- **Build & Debugging**: Build fixer, crash analyzer, test debugger, Xcode debugging
+- **Performance**: SwiftUI performance analyzer, Swift performance analyzer, energy auditor, build optimizer
+- **Architecture**: SwiftUI architecture auditor, navigation auditor, concurrency auditor
+- **Data**: Core Data auditor, SwiftData migration, iCloud auditor, storage auditor
+- **UI/UX**: Accessibility auditor, Liquid Glass (iOS 26+), TextKit auditor, HIG compliance
+- **Testing**: Test runner, test failure analyzer, testing auditor, UI testing, simulator tester
+- **Security**: Security/privacy scanner, IAP auditor, networking auditor
+- **Apple Frameworks**: Foundation Models (on-device AI), Vision, Camera Capture, Core Location, and more
+
+**How it works:**
+Axiom skills activate automatically based on context. When you're working on iOS/Swift code, Claude detects relevant patterns and invokes the appropriate skill.
+
+**Example triggers:**
+```
+"My build is failing" → axiom:ios-build skill activates
+"Check my SwiftUI performance" → axiom:swiftui-performance-analyzer activates
+"Audit my app for accessibility" → axiom:accessibility-auditor activates
+"I'm getting Swift concurrency warnings" → axiom:swift-concurrency activates
+```
+
+**Direct invocation:**
+```
+/axiom:fix-build          # Fix Xcode build failures
+/axiom:audit accessibility # Run accessibility audit
+/axiom:run-tests          # Run and analyze tests
+/axiom:analyze-crash      # Parse crash logs
+```
+
+**Why use Axiom:**
+- ✅ **Comprehensive**: 50+ specialized skills covering all iOS development areas
+- ✅ **Automatic**: Skills invoke based on context - no manual setup needed
+- ✅ **Up-to-date**: Includes iOS 26/WWDC 2025 documentation and Liquid Glass support
+- ✅ **Production-Ready**: Auditors catch real issues before they reach users
+- ✅ **Diagnostic-First**: Environment and build issues diagnosed before code investigation
+
+> **Recommendation:** Axiom is pre-installed when using the Axiom-enabled Claude Code setup. It complements other skills like Swift Concurrency and SwiftUI skills with deeper diagnostic and auditing capabilities.
+
+---
+
 ### Featured: Everything Claude Code (All-in-One Solution)
 
 **Source:** [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) ⭐ **27.4K stars**
@@ -2175,6 +2222,7 @@ rm -rf ~/.claude && claude
 - [Swift Concurrency Guide](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
 
 ### Community Skills & Tools
+- [Axiom iOS Development Skills](https://charleswiltgen.github.io/Axiom/) - ⭐ **50+ specialized iOS skills** with automated auditors, analyzers, and iOS 26 support
 - [AvdLee's Swift Concurrency Skill](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill) - Expert Swift Concurrency guidance
 - [AvdLee's SwiftUI Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill) - Modern SwiftUI patterns and best practices
 - [Dimillian's Skills Collection](https://github.com/Dimillian/Skills)
@@ -2214,6 +2262,7 @@ rm -rf ~/.claude && claude
 ## Acknowledgments
 
 - [Anthropic](https://anthropic.com) for Claude Code CLI
+- [Charles Wiltgen](https://github.com/charleswiltgen) for Axiom - comprehensive iOS development skills suite
 - [Affaan Mustafa](https://github.com/affaan-m) for Everything Claude Code - comprehensive configuration collection
 - [Vercel](https://vercel.com) for Skills.sh and agent skills ecosystem
 - [Cameron Cooke](https://github.com/cameroncooke) for XcodeBuildMCP
