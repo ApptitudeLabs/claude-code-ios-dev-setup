@@ -538,37 +538,45 @@ If you prefer to pick and choose specific skills rather than the all-in-one solu
 
 ### Quick Installation
 
+**Recommended: Using `npx skills add`**
+
+```bash
+# Install iOS development skills with one command each
+# You'll be prompted to choose global (~/.claude/skills) or project (.claude/skills) location
+
+# Core iOS Skills
+npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
+npx skills add https://github.com/AvdLee/SwiftUI-Agent-Skill
+npx skills add https://github.com/AvdLee/Core-Data-Agent-Skill
+npx skills add https://github.com/Dimillian/Skills
+
+# Observability & Production Patterns
+npx skills add https://github.com/nexus-labs-automation/mobile-observability
+npx skills add https://github.com/numman-ali/n-skills
+
+# Optional: OpenSkills CLI for additional skill management
+npx skills add https://github.com/numman-ali/openskills
+```
+
+**Alternative: Manual Git Clone**
+
 ```bash
 #!/bin/bash
-# Install all community agent skills
+# Manual installation with full control over directory names
 
 SKILLS_DIR="$HOME/.claude/skills"
 mkdir -p "$SKILLS_DIR"
 cd "$SKILLS_DIR"
 
-# Swift Concurrency Skill
 git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
-
-# SwiftUI Skill
 git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
-
-# Dimillian's Skills Collection
+git clone https://github.com/AvdLee/Core-Data-Agent-Skill.git core-data
 git clone https://github.com/Dimillian/Skills.git dimillian-skills
-
-# Mobile Observability
 git clone https://github.com/nexus-labs-automation/mobile-observability.git mobile-observability
-
-# OpenSkills - CLI-based skill management compatible with Claude Code
+git clone https://github.com/numman-ali/n-skills.git n-skills
 git clone https://github.com/numman-ali/openskills.git openskills
 
-# n-skills - Curated collection of production-ready agent skills
-git clone https://github.com/numman-ali/n-skills.git n-skills
-
 echo "✅ All skills installed!"
-echo ""
-echo "Additional CLI tools for skill management:"
-echo "  • OpenSkills CLI: Available at ~/.claude/skills/openskills"
-echo "  • n-skills: Curated collection at ~/.claude/skills/n-skills"
 ```
 
 ### Swift Concurrency Agent Skill
@@ -577,6 +585,10 @@ echo "  • n-skills: Curated collection at ~/.claude/skills/n-skills"
 
 **Installation:**
 ```bash
+# Recommended
+npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
+
+# Or manual
 cd ~/.claude/skills/
 git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
 ```
@@ -610,6 +622,10 @@ Claude automatically uses this skill when:
 
 **Installation:**
 ```bash
+# Recommended
+npx skills add https://github.com/AvdLee/SwiftUI-Agent-Skill
+
+# Or manual
 cd ~/.claude/skills/
 git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
 ```
@@ -646,12 +662,60 @@ Claude automatically uses this skill when:
 - ✅ **Non-Opinionated**: Best practices without forcing specific architectures
 - ✅ **Complements Swift Concurrency Skill**: Works great together for complete coverage
 
+### Core Data Agent Skill
+
+**Source:** [AvdLee/Core-Data-Agent-Skill](https://github.com/AvdLee/Core-Data-Agent-Skill)
+
+**Installation:**
+```bash
+# Recommended
+npx skills add https://github.com/AvdLee/Core-Data-Agent-Skill
+
+# Or manual
+cd ~/.claude/skills/
+git clone https://github.com/AvdLee/Core-Data-Agent-Skill.git core-data
+```
+
+**Capabilities:**
+- Core Data stack setup and configuration
+- NSManagedObject subclass generation
+- Fetch requests and NSFetchedResultsController
+- Background context and thread safety
+- Migration strategies (lightweight and custom)
+- Performance optimization and batch operations
+- CloudKit integration with NSPersistentCloudKitContainer
+
+**Automatic Activation:**
+Claude automatically uses this skill when:
+- Setting up Core Data in a project
+- Creating or modifying data models
+- Writing fetch requests or predicates
+- Implementing data persistence
+- Debugging Core Data issues
+
+**Example Usage:**
+```
+> Set up a Core Data stack with CloudKit sync
+> Create a fetch request with sorting and filtering
+> Implement background saving with proper merge policies
+> Migrate my Core Data model to add a new entity
+```
+
+**Why use this:**
+- ✅ **Expert Knowledge**: Created by Antoine van der Lee (SwiftLee)
+- ✅ **Modern Patterns**: Covers latest Core Data APIs and best practices
+- ✅ **Complements SwiftData**: Useful for projects maintaining Core Data alongside SwiftData
+
 ### Dimillian's Skills Collection
 
 **Source:** [Dimillian/Skills](https://github.com/Dimillian/Skills)
 
 **Installation:**
 ```bash
+# Recommended
+npx skills add https://github.com/Dimillian/Skills
+
+# Or manual
 cd ~/.claude/skills/
 git clone https://github.com/Dimillian/Skills.git dimillian-skills
 ```
@@ -676,6 +740,10 @@ git clone https://github.com/Dimillian/Skills.git dimillian-skills
 
 **Installation:**
 ```bash
+# Recommended
+npx skills add https://github.com/nexus-labs-automation/mobile-observability
+
+# Or manual
 cd ~/.claude/skills/
 git clone https://github.com/nexus-labs-automation/mobile-observability.git mobile-observability
 ```
@@ -702,6 +770,10 @@ git clone https://github.com/nexus-labs-automation/mobile-observability.git mobi
 
 **Installation:**
 ```bash
+# Recommended
+npx skills add https://github.com/numman-ali/n-skills
+
+# Or manual
 cd ~/.claude/skills/
 git clone https://github.com/numman-ali/n-skills.git n-skills
 ```
@@ -741,6 +813,10 @@ Skills from n-skills activate automatically based on context, or you can referen
 
 **Installation:**
 ```bash
+# Recommended
+npx skills add https://github.com/numman-ali/openskills
+
+# Or manual
 cd ~/.claude/skills/
 git clone https://github.com/numman-ali/openskills.git openskills
 ```
@@ -844,48 +920,48 @@ Discover and download agent skills and templates from these marketplaces:
 
 **How to use templates and skills:**
 ```bash
-# Method 1: SkillsMP.com - AI-Powered Discovery (RECOMMENDED)
-# Visit https://skillsmp.com/ and use AI semantic search
-# Example searches:
-#   - "SwiftUI navigation patterns"
-#   - "iOS networking with Combine"
-#   - "Swift Concurrency best practices"
+# Method 1: npx skills add (RECOMMENDED)
+# One-liner installation that works with any GitHub repo URL
+# Prompts you to choose installation location and handles symlinks automatically
 
-# Once you find a skill, install it:
-# Option A: Using /plugin install (if skill has marketplace.json)
-# Example: /plugin install skill-name@marketplace-name
+# Install iOS-specific skills:
+npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
+npx skills add https://github.com/AvdLee/SwiftUI-Agent-Skill
+npx skills add https://github.com/AvdLee/Core-Data-Agent-Skill
+npx skills add https://github.com/Dimillian/Skills
+npx skills add https://github.com/nexus-labs-automation/mobile-observability
+npx skills add https://github.com/numman-ali/n-skills
 
-# Option B: Manual installation from GitHub
-# Copy the GitHub URL from SkillsMP and clone:
+# When prompted, choose:
+# - Global (~/.claude/skills) for skills you want across all projects
+# - Project (.claude/skills) for project-specific skills
+#
+# The CLI handles symlinks and folder structure automatically
+
+# Short syntax also available:
+npx skills i https://github.com/author/skill-name
+
+# Method 2: OpenSkills CLI
+# Community-driven CLI-based skill management
+# Compatible with Claude Code's skills format
 cd ~/.claude/skills/
-git clone https://github.com/author/skill-name.git
+git clone https://github.com/numman-ali/openskills.git
+# Follow OpenSkills CLI instructions for skill discovery and management
 
-# Method 2: Skills.sh (Package Manager)
-# Install Vercel's official React/Next.js skills
+# Method 3: Manual Git Clone (Full Control)
+# For those who prefer manual management
+cd ~/.claude/skills/
+git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
+git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
+git clone https://github.com/AvdLee/Core-Data-Agent-Skill.git core-data
+git clone https://github.com/Dimillian/Skills.git dimillian-skills
 
-# Option A: Using 'skills' CLI (lighter-weight)
-npx skills add vercel-labs/agent-skills
-# OR short syntax:
-npx skills i vercel-labs/agent-skills
-
-# Option B: Using 'add-skill' CLI (full-featured, open-source)
-npx add-skill vercel-labs/agent-skills
-
-# Both tools install from skills.sh ecosystem
-# Choose based on your preference
-
-# Method 3: Browse and Clone from Other Marketplaces
-# Browse templates on the website first
-# Visit: https://www.aitmpl.com/agents or https://agent-skills.md/
-
-# Clone the templates repository
-git clone https://github.com/davila7/claude-code-templates.git
-
-# Copy relevant templates to your project
-cp -r claude-code-templates/ios-app/.claude ./
-cp claude-code-templates/ios-app/CLAUDE.md ./
-
-# Customize for your specific needs
+# Method 4: Browse Marketplaces for Discovery
+# Use these to find skills, then install with Method 1:
+# - SkillsMP (https://skillsmp.com/) - 71K+ skills with AI semantic search
+# - Skills.sh (https://skills.sh/) - Vercel's curated marketplace
+# - AI Templates (https://www.aitmpl.com/agents) - Visual template browser
+# - Agent Skills Registry (https://agent-skills.md/) - Community marketplace
 ```
 
 **Benefits:**
@@ -2225,6 +2301,7 @@ rm -rf ~/.claude && claude
 - [Axiom iOS Development Skills](https://charleswiltgen.github.io/Axiom/) - ⭐ **50+ specialized iOS skills** with automated auditors, analyzers, and iOS 26 support
 - [AvdLee's Swift Concurrency Skill](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill) - Expert Swift Concurrency guidance
 - [AvdLee's SwiftUI Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill) - Modern SwiftUI patterns and best practices
+- [AvdLee's Core Data Skill](https://github.com/AvdLee/Core-Data-Agent-Skill) - Core Data stack setup, migrations, and CloudKit sync
 - [Dimillian's Skills Collection](https://github.com/Dimillian/Skills)
 - [Nexus Labs Mobile Observability](https://github.com/nexus-labs-automation/mobile-observability)
 - [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
@@ -2267,7 +2344,7 @@ rm -rf ~/.claude && claude
 - [Vercel](https://vercel.com) for Skills.sh and agent skills ecosystem
 - [Cameron Cooke](https://github.com/cameroncooke) for XcodeBuildMCP
 - [Conor Luddy](https://github.com/conorluddy) for xc-mcp
-- [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency Skill and SwiftUI Skill
+- [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency, SwiftUI, and Core Data Skills
 - [Thomas Ricouard (Dimillian)](https://github.com/Dimillian) for Skills Collection
 - [Nexus Labs](https://github.com/nexus-labs-automation) for Mobile Observability
 - [Numan Ali](https://github.com/numman-ali) for n-skills and OpenSkills
