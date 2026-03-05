@@ -177,7 +177,41 @@ claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem
 
 # Sequential Thinking - Complex multi-step reasoning
 claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
+
+# Sosumi - Apple developer documentation (Swift, SwiftUI, Xcode, etc.)
+claude mcp add --transport http sosumi https://sosumi.ai/mcp
 ```
+
+### Sosumi - Apple Docs CLI & MCP
+
+**Source:** [sosumi.ai](https://sosumi.ai/)
+
+Sosumi provides instant access to Apple developer documentation directly from your terminal or via MCP. Ideal for looking up Swift APIs, SwiftUI modifiers, and framework references without leaving Claude Code.
+
+**CLI Usage:**
+
+```bash
+# One-off lookup
+npx @nshipster/sosumi fetch /documentation/swift/array
+
+# If you use it regularly, install it once:
+npm i -g @nshipster/sosumi
+sosumi fetch /documentation/swiftui/text
+```
+
+**MCP Installation:**
+
+```bash
+claude mcp add --transport http sosumi https://sosumi.ai/mcp
+```
+
+**Verify:**
+
+```bash
+claude mcp list
+```
+
+> **Tip:** Once connected, Claude can look up Apple API references mid-session without switching to a browser.
 
 ### Xcode MCP Servers
 
@@ -2292,6 +2326,7 @@ rm -rf ~/.claude && claude
 - [Memory Keeper MCP](https://github.com/mkreyman/mcp-memory-keeper) - Advanced memory system
 
 ### Apple Developer Resources
+- [Sosumi](https://sosumi.ai/) - Apple developer docs CLI & MCP (`npm i -g @nshipster/sosumi`)
 - [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
 - [Swift Evolution Proposals](https://github.com/apple/swift-evolution)
 - [SwiftUI Documentation](https://developer.apple.com/documentation/swiftui)
