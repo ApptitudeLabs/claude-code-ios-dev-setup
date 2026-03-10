@@ -953,6 +953,10 @@ Discover and download agent skills and templates from these marketplaces:
    - Explore curated agent skills
    - Browse by category and use case
    - Community contributions
+7. **[Awesome Skills - awesomeskill.ai](https://awesomeskill.ai/)**
+   - Open directory of Claude Code, OpenAI Codex, and ChatGPT agent skills with featured, latest, and curated collections for productivity, development, and automation scenarios
+   - Browse SKILL.md entries straight from GitHub, hear about the newest guides/resources, and subscribe to the newsletter for weekly updates
+   - Search by name, description, or keyword and download ready-to-install skill packs for Claude Code, Codex, and related assistants
 
 **GitHub Repositories:**
 - **[claude-code-templates](https://github.com/davila7/claude-code-templates)** - Template source files
@@ -2356,6 +2360,7 @@ rm -rf ~/.claude && claude
 - [AI Templates](https://www.aitmpl.com/agents) - Visual browser for Claude Code templates
 - [Agent Skills Registry](https://agent-skills.md/) - Community skill marketplace with search
 - [Skill Creator AI](https://www.skillcreator.ai/explore) - AI-powered skill discovery and exploration
+- [Awesome Skills](https://awesomeskill.ai/) - Open directory of Claude Code, Codex, and ChatGPT agent skills with featured/latest collections and GitHub-linked SKILL.md downloads
 - [Claude Code Templates](https://github.com/davila7/claude-code-templates) - Template repository (GitHub)
 - [Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills) - Curated skills repository (GitHub)
 - [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) - Official Vercel skills (React/Next.js focused)
