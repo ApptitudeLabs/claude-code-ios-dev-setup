@@ -942,7 +942,13 @@ Discover and download agent skills and templates from these marketplaces:
    - One-command installation
    - Wide variety of domains
 
-5. **[Skill Creator AI - skillcreator.ai/explore](https://www.skillcreator.ai/explore)**
+5. **[Agent Skills - agentskills.so](https://agentskills.so/)**
+   - Curated agent skills marketplace
+   - Browse and discover skills by category
+   - Community-driven contributions
+   - Easy skill discovery and installation
+
+6. **[Skill Creator AI - skillcreator.ai/explore](https://www.skillcreator.ai/explore)**
    - AI-powered skill discovery
    - Explore curated agent skills
    - Browse by category and use case
