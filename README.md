@@ -24,6 +24,7 @@
 16. [Hooks for Swift Development](#16-hooks-for-swift-development)
 17. [Complete Project Structure](#17-complete-project-structure)
 18. [Best Practices & Tips](#18-best-practices-tips)
+19. [Learnings & Continuous Improvement](#19-learnings--continuous-improvement)
 
 ---
 
@@ -2304,6 +2305,15 @@ rm -rf ~/.claude && claude
 ```
 
 ---
+
+## 19. Learnings & Continuous Improvement
+
+Just like `docs/PRD.md` documents the requirements that drive development, `Learnings.md` captures the operating lessons that keep agents out of repeat trouble. Treat it as a living log where you describe recent tool missteps, non-obvious troubleshooting paths, and anything that helped you avoid wasted effort.
+
+- Ask your agent to `Please create a Learnings.md file. Add any insights from this session that would help you work with tools, or prevent bad tool calls or buggy code. Please append knowledge as you work so we can be proactive. Create Markdown front matter and a table of contents with guidance on how future agents can update it.`
+- `Learnings.md` already contains front matter (`title`, `created`, `last_updated`, `status`), a table of contents, Session Insights, Tooling Reminders, and a `Guidance for Future Agents` section. Update Session Insights or Tooling Reminders with every significant lesson, preserving chronology and bumping `last_updated` when you add entries.
+- `AGENTS.md` now enforces this process: read `Learnings.md` before tackling a hard bug, then append a dated summary after any investigation that required extra effort so future agents know what to avoid.
+- Remember that documenting a workaround is as valuable as writing the fix—keep entries short, factual, and refer to files/commands (e.g., `docs/PRD.md` references) so the next agent can move faster without re-learning old mistakes.
 
 ## Quick Start Checklist
 
