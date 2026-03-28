@@ -584,6 +584,7 @@ npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
 npx skills add https://github.com/AvdLee/SwiftUI-Agent-Skill
 npx skills add https://github.com/AvdLee/Core-Data-Agent-Skill
 npx skills add https://github.com/Dimillian/Skills
+npx skills add https://github.com/twostraws/SwiftUI-Agent-Skill
 
 # Observability & Production Patterns
 npx skills add https://github.com/nexus-labs-automation/mobile-observability
@@ -607,6 +608,7 @@ git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-conc
 git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
 git clone https://github.com/AvdLee/Core-Data-Agent-Skill.git core-data
 git clone https://github.com/Dimillian/Skills.git dimillian-skills
+git clone https://github.com/twostraws/SwiftUI-Agent-Skill.git swiftui-pro
 git clone https://github.com/nexus-labs-automation/mobile-observability.git mobile-observability
 git clone https://github.com/numman-ali/n-skills.git n-skills
 git clone https://github.com/numman-ali/openskills.git openskills
@@ -697,6 +699,50 @@ Claude automatically uses this skill when:
 - ✅ **Non-Opinionated**: Best practices without forcing specific architectures
 - ✅ **Complements Swift Concurrency Skill**: Works great together for complete coverage
 
+### SwiftUI Pro Skill (Paul Hudson / twostraws)
+
+**Source:** [twostraws/SwiftUI-Agent-Skill](https://github.com/twostraws/SwiftUI-Agent-Skill) ⭐ **3.2K stars**
+
+A skill by Paul Hudson (creator of Hacking with Swift) that teaches AI coding assistants to write better SwiftUI code by correcting the most common LLM mistakes.
+
+**Installation:**
+```bash
+# Recommended
+npx skills add https://github.com/twostraws/SwiftUI-Agent-Skill
+
+# Or manual
+cd ~/.claude/skills/
+git clone https://github.com/twostraws/SwiftUI-Agent-Skill.git swiftui-pro
+```
+
+**Capabilities:**
+- SwiftUI navigation patterns (NavigationStack, NavigationPath, NavigationSplitView)
+- Layout system (alignment, spacing, GeometryReader gotchas)
+- Animations and transitions (matched geometry, phase animations)
+- State management (@State, @Binding, @Observable, @Environment)
+- Accessibility (VoiceOver labels, traits, custom actions)
+- Performance patterns (lazy loading, identity stability, view updates)
+- Deprecated API detection and migration paths
+
+**Invocation:**
+```
+/swiftui-pro   # In Claude Code
+$swiftui-pro   # In Codex
+```
+
+**Example Usage:**
+```
+> /swiftui-pro — implement a master-detail split view with deep linking
+> /swiftui-pro — why is my List updating more than it should?
+> /swiftui-pro — make this form accessible with VoiceOver
+```
+
+**Why use this:**
+- ✅ **LLM-Error Focused**: Specifically targets the mistakes AI tools most often make in SwiftUI
+- ✅ **Real-World Experience**: Patterns drawn from extensive SwiftUI teaching at Hacking with Swift
+- ✅ **Complements AvdLee SwiftUI Skill**: Different lens — where AvdLee is broad, this is opinionated about correctness
+- ✅ **Part of a Suite**: Pairs with SwiftData Pro, Swift Concurrency Pro, and Swift Testing Pro skills
+
 ### Core Data Agent Skill
 
 **Source:** [AvdLee/Core-Data-Agent-Skill](https://github.com/AvdLee/Core-Data-Agent-Skill)
@@ -743,7 +789,9 @@ Claude automatically uses this skill when:
 
 ### Dimillian's Skills Collection
 
-**Source:** [Dimillian/Skills](https://github.com/Dimillian/Skills)
+**Source:** [Dimillian/Skills](https://github.com/Dimillian/Skills) | [Website](https://dimillian.github.io/Skills/) ⭐ **2.4K stars**
+
+A curated set of 14 focused, self-contained skills for Swift, SwiftUI, and iOS workflows. Built by Dimillian (creator of IceCubesApp) to help you review, debug, and ship faster.
 
 **Installation:**
 ```bash
@@ -755,19 +803,30 @@ cd ~/.claude/skills/
 git clone https://github.com/Dimillian/Skills.git dimillian-skills
 ```
 
-**Included Skills:**
-- SwiftUI Component Library
-- Navigation patterns
-- Data modeling best practices
-- Testing strategies
-- Performance optimization
-- Accessibility implementation
+**Included Skills (14 total):**
 
-**Automatic Activation:**
-- Building SwiftUI interfaces
-- Creating reusable components
-- Implementing navigation
-- Writing tests
+| Skill | What it does |
+|---|---|
+| **App Store Changelog** | Transforms git history since last tag into user-facing "What's New" release notes |
+| **GitHub** | Operates on issues, PRs, and workflow runs using the `gh` CLI |
+| **iOS Debugger Agent** | Builds, launches, and debugs iOS apps on simulators using XcodeBuildMCP tools |
+| **macOS Menubar Tuist App** | Handles menubar app development with Tuist and SwiftUI |
+| **macOS SwiftPM App Packaging** | Scaffolds and packages macOS apps without Xcode |
+| **Orchestrate Batch Refactor** | Plans and executes large-scale refactoring across a codebase |
+| **Project Skill Audit** | Analyzes the current project and recommends which skills to add |
+| **React Component Performance** | Diagnoses re-rendering issues and optimization opportunities |
+| **Simplify Code** | Reviews code diffs for quality, reuse, and efficiency improvements |
+| **Swift Concurrency Expert** | Reviews and fixes Swift 6.2+ concurrency issues and actor isolation |
+| **SwiftUI Liquid Glass** | Implements iOS 26+ Liquid Glass API correctly |
+| **SwiftUI Performance Audit** | Analyzes runtime bottlenecks with Instruments guidance |
+| **SwiftUI UI Patterns** | Best practices for views, components, navigation, and theming |
+| **SwiftUI View Refactor** | Refactors views toward consistent structure, DI, and Observation patterns |
+
+**Why use this:**
+- ✅ **Apple-Platform Focused**: All skills target Swift, SwiftUI, and iOS/macOS workflows
+- ✅ **Single-Purpose**: Each skill is tightly scoped — no bloat
+- ✅ **iOS 26+ Ready**: Includes Liquid Glass and Swift 6.2 concurrency coverage
+- ✅ **Active Maintenance**: Regularly updated by the community
 
 ### Mobile Observability Skill
 
