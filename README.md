@@ -137,11 +137,14 @@ Priority (Highest to Lowest):
 
 echo "🚀 Installing Essential MCP Servers..."
 
-# Core iOS Development - Choose one:
-# Option 1: XcodeBuildMCP (Recommended - Full featured)
+# Core iOS Development - Choose one or combine:
+# Option 1: XcodeBuildMCP (Recommended - Full featured build pipeline)
 npx -y @smithery/cli@latest install cameroncooke/xcodebuildmcp --client claude-code
 
-# Option 2: xc-mcp (Alternative - Lightweight)
+# Option 2: mcpbridge (Apple-native, ships with Xcode - zero external deps)
+claude mcp add --transport stdio xcode -- xcrun mcpbridge
+
+# Option 3: xc-mcp (Lightweight third-party alternative)
 # claude mcp add xc-mcp -- npx -y xc-mcp
 
 # Version Control
@@ -216,7 +219,7 @@ claude mcp list
 
 ### Xcode MCP Servers
 
-There are two main MCP servers for Xcode integration. Choose based on your needs:
+There are three main MCP servers for Xcode integration. Choose based on your needs:
 
 #### XcodeBuildMCP (Recommended for Full Build Pipeline)
 
@@ -271,12 +274,33 @@ claude mcp add xc-mcp -- npx -y xc-mcp
 - Simpler setup for smaller projects
 - Alternative to XcodeBuildMCP
 
+#### mcpbridge (Apple's Native Xcode MCP Bridge)
+
+**Built into Xcode** — no external install required. Apple ships `mcpbridge` as part of Xcode's toolchain, exposing Xcode's internal APIs directly to MCP clients.
+
+**Installation:**
+```bash
+claude mcp add --transport stdio xcode -- xcrun mcpbridge
+```
+
+**Best for:**
+- Deep Xcode IDE integration via Apple's own tooling
+- Access to Xcode-internal APIs not exposed by third-party servers
+- Zero-dependency setup (ships with Xcode — just `xcrun` it)
+- Pairing with XcodeBuildMCP for maximum coverage
+
+**Why use this:**
+- No npm, no Node.js, no external processes — just Xcode
+- Apple-maintained, so it tracks new Xcode capabilities automatically
+- Complements XcodeBuildMCP: use both for full build pipeline + deep IDE access
+
 **When to use which:**
 - **Use XcodeBuildMCP** for production projects with full CI/CD needs
-- **Use xc-mcp** for lighter-weight projects or as an alternative
-- **Can use both** but typically choose one to avoid conflicts
+- **Use mcpbridge** for deep Xcode IDE integration with zero external dependencies
+- **Use xc-mcp** for a lightweight third-party alternative
+- **Combine XcodeBuildMCP + mcpbridge** for the most complete Xcode integration
 
-> **Recommendation:** Start with **XcodeBuildMCP** for comprehensive iOS development. Try **xc-mcp** if you need a lighter alternative or want to experiment with different workflows.
+> **Recommendation:** Start with **XcodeBuildMCP** for comprehensive iOS development. Add **mcpbridge** (`xcrun mcpbridge`) for Apple-native Xcode IDE access — they complement each other well.
 
 ### GitHub MCP
 
@@ -583,6 +607,7 @@ If you prefer to pick and choose specific skills rather than the all-in-one solu
 npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
 npx skills add https://github.com/AvdLee/SwiftUI-Agent-Skill
 npx skills add https://github.com/AvdLee/Core-Data-Agent-Skill
+npx skills add https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill
 npx skills add https://github.com/Dimillian/Skills
 npx skills add https://github.com/twostraws/SwiftUI-Agent-Skill
 
@@ -607,6 +632,7 @@ cd "$SKILLS_DIR"
 git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
 git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
 git clone https://github.com/AvdLee/Core-Data-Agent-Skill.git core-data
+git clone https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill.git xcode-build-optimization
 git clone https://github.com/Dimillian/Skills.git dimillian-skills
 git clone https://github.com/twostraws/SwiftUI-Agent-Skill.git swiftui-pro
 git clone https://github.com/nexus-labs-automation/mobile-observability.git mobile-observability
@@ -786,6 +812,50 @@ Claude automatically uses this skill when:
 - ✅ **Expert Knowledge**: Created by Antoine van der Lee (SwiftLee)
 - ✅ **Modern Patterns**: Covers latest Core Data APIs and best practices
 - ✅ **Complements SwiftData**: Useful for projects maintaining Core Data alongside SwiftData
+
+### Xcode Build Optimization Skill (AvdLee)
+
+**Source:** [AvdLee/Xcode-Build-Optimization-Agent-Skill](https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill)
+
+A skill by Antoine van der Lee that teaches Claude how to diagnose and fix slow Xcode build times. Covers compiler flags, build phase scripts, parallelization, and dependency analysis to help you ship faster.
+
+**Installation:**
+```bash
+# Recommended
+npx skills add https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill
+
+# Or manual
+cd ~/.claude/skills/
+git clone https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill.git xcode-build-optimization
+```
+
+**Capabilities:**
+- Identifying slow type-checking and compile-time bottlenecks
+- Optimizing build phase scripts and Run Script phases
+- Enabling build parallelization and incremental builds
+- Analyzing module dependencies and reducing rebuild scope
+- Configuring `SWIFT_COMPILATION_MODE` and other build settings
+- Diagnosing clean vs. incremental build regressions
+
+**Automatic Activation:**
+Claude automatically uses this skill when:
+- Build times are reported as slow
+- Asking how to speed up Xcode builds
+- Investigating CI/CD build duration regressions
+- Optimizing build settings for a new project
+
+**Example Usage:**
+```
+> My clean build takes 4 minutes — help me find what's slow
+> Enable parallel compilation in my Xcode project
+> Why does my build always recompile everything?
+> Optimize my Run Script phases for faster incremental builds
+```
+
+**Why use this:**
+- ✅ **Expert Knowledge**: Built by Antoine van der Lee (SwiftLee), prolific iOS build tooling contributor
+- ✅ **Practical Focus**: Real-world build time wins, not theoretical advice
+- ✅ **Pairs Well**: Complements XcodeBuildMCP for a full build optimization workflow
 
 ### Dimillian's Skills Collection
 
@@ -1032,6 +1102,7 @@ Discover and download agent skills and templates from these marketplaces:
 npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
 npx skills add https://github.com/AvdLee/SwiftUI-Agent-Skill
 npx skills add https://github.com/AvdLee/Core-Data-Agent-Skill
+npx skills add https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill
 npx skills add https://github.com/Dimillian/Skills
 npx skills add https://github.com/nexus-labs-automation/mobile-observability
 npx skills add https://github.com/numman-ali/n-skills
@@ -1058,6 +1129,7 @@ cd ~/.claude/skills/
 git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
 git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
 git clone https://github.com/AvdLee/Core-Data-Agent-Skill.git core-data
+git clone https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill.git xcode-build-optimization
 git clone https://github.com/Dimillian/Skills.git dimillian-skills
 
 # Method 4: Browse Marketplaces for Discovery
@@ -2200,6 +2272,59 @@ if ! xcrun simctl list devices booted | grep -q "Booted"; then
 fi
 ```
 
+### RTK — Token-Optimized CLI Proxy
+
+**Source:** [rtk-ai/rtk](https://github.com/rtk-ai/rtk)
+
+RTK (Rust Token Killer) is a transparent CLI proxy that intercepts common shell commands and strips noise before Claude sees the output — cutting context usage by 60–90% on typical dev operations like `git status`, `swift build`, and log inspection.
+
+**Installation:**
+```bash
+# Install via Homebrew (macOS)
+brew install rtk-ai/tap/rtk
+
+# Verify
+rtk --version
+rtk gain   # Show token savings analytics
+```
+
+**How it works with Claude Code:**
+
+RTK registers as a Claude Code hook so all commands are automatically rewritten without any changes to your workflow:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk intercept"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Once configured, `git status` becomes `rtk git status` transparently — Claude receives filtered, compact output instead of the raw terminal dump.
+
+**Key commands:**
+```bash
+rtk gain              # Show cumulative token savings
+rtk gain --history    # Per-command savings history
+rtk discover          # Analyze Claude Code history for missed RTK opportunities
+rtk proxy <cmd>       # Run a command unfiltered (debug/bypass)
+```
+
+**Why use this:**
+- ✅ **Transparent**: Zero changes to your workflow — commands are intercepted automatically
+- ✅ **Significant savings**: 60–90% reduction on verbose commands (build logs, git output, test results)
+- ✅ **Rust-based**: Fast, low-overhead binary with no Node.js dependency
+
 ---
 
 ## 17. Complete Project Structure
@@ -2400,6 +2525,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 ### Official Documentation
 - [Claude Code Official Docs](https://code.claude.com/docs)
 - [XcodeBuildMCP GitHub](https://github.com/cameroncooke/XcodeBuildMCP)
+- [mcpbridge](https://developer.apple.com/xcode/) - Apple's native Xcode MCP bridge, ships with Xcode (`xcrun mcpbridge`)
 - [xc-mcp GitHub](https://github.com/conorluddy/xc-mcp)
 - [MCP Documentation](https://modelcontextprotocol.io)
 - [Memory Keeper MCP](https://github.com/mkreyman/mcp-memory-keeper) - Advanced memory system
@@ -2416,12 +2542,16 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [AvdLee's Swift Concurrency Skill](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill) - Expert Swift Concurrency guidance
 - [AvdLee's SwiftUI Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill) - Modern SwiftUI patterns and best practices
 - [AvdLee's Core Data Skill](https://github.com/AvdLee/Core-Data-Agent-Skill) - Core Data stack setup, migrations, and CloudKit sync
+- [AvdLee's Xcode Build Optimization Skill](https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill) - Diagnose and fix slow Xcode build times
 - [Dimillian's Skills Collection](https://github.com/Dimillian/Skills)
 - [Nexus Labs Mobile Observability](https://github.com/nexus-labs-automation/mobile-observability)
 - [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
 - [OpenSkills - CLI Tool](https://github.com/numman-ali/openskills) - CLI for managing skills
 - [Agents Plugin System](https://github.com/wshobson/agents) - Modular plugin system for Claude Code
 - [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) - ⭐ **Complete all-in-one configuration from Anthropic hackathon winner**
+- [RTK — Rust Token Killer](https://github.com/rtk-ai/rtk) - Transparent CLI proxy that reduces context usage by 60–90% by filtering noise from `git`, `swift build`, and other verbose commands before Claude sees the output
+- [Code Review Graph](https://github.com/tirth8205/code-review-graph) - Visualizes code review workflows as dependency graphs, helping you understand review bottlenecks and PR relationships across your codebase
+- [Memvid](https://github.com/memvid/memvid) - Encodes large knowledge bases (docs, codebases, notes) into video files for ultra-compact, fast-retrieval AI memory — useful for giving Claude persistent context across long projects without hitting token limits
 
 ### Marketplaces & Registries
 - [SkillsMP](https://skillsmp.com/) - ⭐ **71,000+ skills with AI semantic search** (LARGEST marketplace)
@@ -2435,6 +2565,8 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) - Official Vercel skills (React/Next.js focused)
 
 ### Xcode & Development Workflow
+- [Claude Code in Xcode 26.3 — Agentic Coding Codex](https://www.swiftjectivec.com/agentic-coding-codex-claude-code-in-xcode/) - Practical guide to running Claude Code inside Xcode, covering the agentic workflow, prompt patterns, and tips for iOS-native development
+- [Claude Code LSP Integration](https://karanbansal.in/blog/claude-code-lsp/) - How to wire Claude Code into the Language Server Protocol for richer in-editor intelligence, diagnostics, and code actions
 - [Make Xcode Great Again](https://khorbushko.github.io/article/2021/02/01/make-xCode-great-again.html) - Xcode performance optimization
 - [Xcode EditorConfig Setup](https://www.polpiella.dev/xcode-editor-config/) - Consistent formatting with EditorConfig
 - [Xcode and Git: Bridging the Gap](https://thoughtbot.com/blog/xcode-and-git-bridging-the-gap) - Git integration best practices for Xcode projects
@@ -2457,11 +2589,13 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Charles Wiltgen](https://github.com/charleswiltgen) for Axiom - comprehensive iOS development skills suite
 - [Affaan Mustafa](https://github.com/affaan-m) for Everything Claude Code - comprehensive configuration collection
 - [Vercel](https://vercel.com) for Skills.sh and agent skills ecosystem
+- [Apple](https://developer.apple.com) for mcpbridge — native Xcode MCP bridge
 - [Cameron Cooke](https://github.com/cameroncooke) for XcodeBuildMCP
 - [Conor Luddy](https://github.com/conorluddy) for xc-mcp
-- [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency, SwiftUI, and Core Data Skills
+- [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency, SwiftUI, Core Data, and Xcode Build Optimization Skills
 - [Thomas Ricouard (Dimillian)](https://github.com/Dimillian) for Skills Collection
 - [Nexus Labs](https://github.com/nexus-labs-automation) for Mobile Observability
+- [RTK team](https://github.com/rtk-ai) for RTK — Rust Token Killer
 - [Numan Ali](https://github.com/numman-ali) for n-skills and OpenSkills
 - [skillcreatorai](https://github.com/skillcreatorai) for Ai-Agent-Skills collection
 - [Carlos Davila](https://github.com/davila7) for Claude Code Templates
