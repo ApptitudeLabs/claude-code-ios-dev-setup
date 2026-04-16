@@ -539,11 +539,8 @@ If you prefer to pick and choose specific skills rather than the all-in-one solu
 
 ### Quick Installation
 
-**Recommended: Using `npx skills add`**
-
 ```bash
-# Install iOS development skills with one command each
-# You'll be prompted to choose global (~/.claude/skills) or project (.claude/skills) location
+# Install iOS development skills — prompts you to choose global or project scope
 
 # Core iOS Skills
 npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
@@ -559,27 +556,6 @@ npx skills add https://github.com/numman-ali/n-skills
 
 ```
 
-**Alternative: Manual Git Clone**
-
-```bash
-#!/bin/bash
-# Manual installation with full control over directory names
-
-SKILLS_DIR="$HOME/.claude/skills"
-mkdir -p "$SKILLS_DIR"
-cd "$SKILLS_DIR"
-
-git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
-git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
-git clone https://github.com/AvdLee/Core-Data-Agent-Skill.git core-data
-git clone https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill.git xcode-build-optimization
-git clone https://github.com/Dimillian/Skills.git dimillian-skills
-git clone https://github.com/twostraws/SwiftUI-Agent-Skill.git swiftui-pro
-git clone https://github.com/nexus-labs-automation/mobile-observability.git mobile-observability
-git clone https://github.com/numman-ali/n-skills.git n-skills
-
-echo "✅ All skills installed!"
-```
 
 ### Swift Concurrency Agent Skill
 
@@ -587,12 +563,7 @@ echo "✅ All skills installed!"
 
 **Installation:**
 ```bash
-# Recommended
 npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
-
-# Or manual
-cd ~/.claude/skills/
-git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
 ```
 
 **Capabilities:**
@@ -624,12 +595,7 @@ Claude automatically uses this skill when:
 
 **Installation:**
 ```bash
-# Recommended
 npx skills add https://github.com/AvdLee/SwiftUI-Agent-Skill
-
-# Or manual
-cd ~/.claude/skills/
-git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
 ```
 
 **Capabilities:**
@@ -672,12 +638,7 @@ A skill by Paul Hudson (creator of Hacking with Swift) that teaches AI coding as
 
 **Installation:**
 ```bash
-# Recommended
 npx skills add https://github.com/twostraws/SwiftUI-Agent-Skill
-
-# Or manual
-cd ~/.claude/skills/
-git clone https://github.com/twostraws/SwiftUI-Agent-Skill.git swiftui-pro
 ```
 
 **Capabilities:**
@@ -714,12 +675,7 @@ $swiftui-pro   # In Codex
 
 **Installation:**
 ```bash
-# Recommended
 npx skills add https://github.com/AvdLee/Core-Data-Agent-Skill
-
-# Or manual
-cd ~/.claude/skills/
-git clone https://github.com/AvdLee/Core-Data-Agent-Skill.git core-data
 ```
 
 **Capabilities:**
@@ -760,12 +716,7 @@ A skill by Antoine van der Lee that teaches Claude how to diagnose and fix slow 
 
 **Installation:**
 ```bash
-# Recommended
 npx skills add https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill
-
-# Or manual
-cd ~/.claude/skills/
-git clone https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill.git xcode-build-optimization
 ```
 
 **Capabilities:**
@@ -804,12 +755,7 @@ A curated set of 14 focused, self-contained skills for Swift, SwiftUI, and iOS w
 
 **Installation:**
 ```bash
-# Recommended
 npx skills add https://github.com/Dimillian/Skills
-
-# Or manual
-cd ~/.claude/skills/
-git clone https://github.com/Dimillian/Skills.git dimillian-skills
 ```
 
 **Included Skills (14 total):**
@@ -843,12 +789,7 @@ git clone https://github.com/Dimillian/Skills.git dimillian-skills
 
 **Installation:**
 ```bash
-# Recommended
 npx skills add https://github.com/nexus-labs-automation/mobile-observability
-
-# Or manual
-cd ~/.claude/skills/
-git clone https://github.com/nexus-labs-automation/mobile-observability.git mobile-observability
 ```
 
 **Capabilities:**
@@ -873,12 +814,7 @@ git clone https://github.com/nexus-labs-automation/mobile-observability.git mobi
 
 **Installation:**
 ```bash
-# Recommended
 npx skills add https://github.com/numman-ali/n-skills
-
-# Or manual
-cd ~/.claude/skills/
-git clone https://github.com/numman-ali/n-skills.git n-skills
 ```
 
 **What it is:**
@@ -1008,13 +944,9 @@ Discover and download agent skills and templates from these marketplaces:
 - **[claude-code-templates](https://github.com/davila7/claude-code-templates)** - Template source files
 - **[Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills)** - Curated skills collection
 
-**How to use templates and skills:**
+**How to install skills:**
 ```bash
-# Method 1: npx skills add (RECOMMENDED)
-# One-liner installation that works with any GitHub repo URL
-# Prompts you to choose installation location and handles symlinks automatically
-
-# Install iOS-specific skills:
+# Install any skill with npx skills add
 npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
 npx skills add https://github.com/AvdLee/SwiftUI-Agent-Skill
 npx skills add https://github.com/AvdLee/Core-Data-Agent-Skill
@@ -1026,23 +958,11 @@ npx skills add https://github.com/numman-ali/n-skills
 # When prompted, choose:
 # - Global (~/.claude/skills) for skills you want across all projects
 # - Project (.claude/skills) for project-specific skills
-#
-# The CLI handles symlinks and folder structure automatically
 
-# Short syntax also available:
-npx skills i https://github.com/author/skill-name
+# Or install a full skill collection via Claude's plugin system:
+claude mcp add skills -- npx -y skills.sh axiom
 
-# Method 2: Manual Git Clone (Full Control)
-# For those who prefer manual management
-cd ~/.claude/skills/
-git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
-git clone https://github.com/AvdLee/SwiftUI-Agent-Skill.git swiftui
-git clone https://github.com/AvdLee/Core-Data-Agent-Skill.git core-data
-git clone https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill.git xcode-build-optimization
-git clone https://github.com/Dimillian/Skills.git dimillian-skills
-
-# Method 4: Browse Marketplaces for Discovery
-# Use these to find skills, then install with Method 1:
+# Browse marketplaces to discover more skills:
 # - SkillsMP (https://skillsmp.com/) - 71K+ skills with AI semantic search
 # - Skills.sh (https://skills.sh/) - Vercel's curated marketplace
 # - AI Templates (https://www.aitmpl.com/agents) - Visual template browser
