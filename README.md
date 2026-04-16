@@ -508,16 +508,6 @@ Complete Claude Code configuration collection from an **Anthropic hackathon winn
 /plugin install everything-claude-code@everything-claude-code
 ```
 
-**Alternative (Manual Installation):**
-```bash
-# Clone and copy components
-git clone https://github.com/affaan-m/everything-claude-code.git
-cp everything-claude-code/agents/*.md ~/.claude/agents/
-cp everything-claude-code/commands/*.md ~/.claude/commands/
-cp -r everything-claude-code/skills/* ~/.claude/skills/
-# See repo for hooks and MCP configurations
-```
-
 **Why use this:**
 - ✅ **Production-Proven**: Built while shipping real products
 - ✅ **Comprehensive**: Everything you need in one place
