@@ -4,6 +4,38 @@
 
 ---
 
+## Quick Start
+
+New here? Do these four things and you'll have a solid iOS setup in under 10 minutes.
+
+**1. Install Claude Code**
+```bash
+brew install claude
+claude  # authenticate
+```
+
+**2. Install Axiom iOS Skills** — 50+ specialized iOS skills that activate automatically
+```bash
+claude mcp add skills -- npx -y skills.sh axiom
+```
+
+**3. Add a `CLAUDE.md` to your Xcode project** — tells Claude about your app
+```bash
+cd ~/path/to/YourApp
+claude "Create a CLAUDE.md for this iOS project"
+```
+
+**4. Install XcodeBuildMCP** — lets Claude build, run, and debug in Xcode directly
+```bash
+claude mcp add xcodebuildmcp -- npx -y xcodebuildmcp
+```
+
+That's it. Claude will now automatically invoke the right iOS skill based on what you're working on — build failures, SwiftUI issues, accessibility audits, and more.
+
+> **Going deeper?** The full guide below covers PRD-driven workflows, extended thinking, hooks, token optimization, and everything else. Use the Table of Contents to jump to what you need.
+
+---
+
 ## Table of Contents
 
 1. [Installation](#1-installation)
@@ -2559,7 +2591,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [SwiftUI Documentation](https://developer.apple.com/documentation/swiftui)
 - [Swift Concurrency Guide](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
 
-### Community Skills & Tools
+### iOS Agent Skills
 - [Axiom iOS Development Skills](https://charleswiltgen.github.io/Axiom/) - ⭐ **50+ specialized iOS skills** with automated auditors, analyzers, and iOS 26 support
 - [AvdLee's Swift Concurrency Skill](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill) - Expert Swift Concurrency guidance
 - [AvdLee's SwiftUI Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill) - Modern SwiftUI patterns and best practices
@@ -2567,15 +2599,19 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [AvdLee's Xcode Build Optimization Skill](https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill) - Diagnose and fix slow Xcode build times
 - [Dimillian's Skills Collection](https://github.com/Dimillian/Skills)
 - [Nexus Labs Mobile Observability](https://github.com/nexus-labs-automation/mobile-observability)
+- [Trail of Bits Skills](https://github.com/trailofbits/skills) - Security-focused agent skills from the renowned security research firm, covering vulnerability analysis, secure code review, threat modeling, and cryptography best practices
+
+### Claude Code Configuration
+- [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) - ⭐ **Complete all-in-one configuration from Anthropic hackathon winner**
+- [Agents Plugin System](https://github.com/wshobson/agents) - Modular plugin system for Claude Code
 - [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
 - [OpenSkills - CLI Tool](https://github.com/numman-ali/openskills) - CLI for managing skills
-- [Agents Plugin System](https://github.com/wshobson/agents) - Modular plugin system for Claude Code
-- [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) - ⭐ **Complete all-in-one configuration from Anthropic hackathon winner**
+
+### Token & Context Optimization
 - [RTK — Rust Token Killer](https://github.com/rtk-ai/rtk) - Transparent CLI proxy that reduces context usage by 60–90% by filtering noise from `git`, `swift build`, and other verbose commands before Claude sees the output
 - [tokensave](https://github.com/aovestdipaperino/tokensave) - Local-first semantic code intelligence system (Rust) that builds a knowledge graph from your codebase so agents can query structured symbol relationships instead of repeatedly grepping files — fewer tool calls, fewer tokens
 - [Code Review Graph](https://github.com/tirth8205/code-review-graph) - Visualizes code review workflows as dependency graphs, helping you understand review bottlenecks and PR relationships across your codebase
 - [Memvid](https://github.com/memvid/memvid) - Encodes large knowledge bases (docs, codebases, notes) into video files for ultra-compact, fast-retrieval AI memory — useful for giving Claude persistent context across long projects without hitting token limits
-- [Trail of Bits Skills](https://github.com/trailofbits/skills) - Security-focused agent skills from the renowned security research firm, covering vulnerability analysis, secure code review, threat modeling, and cryptography best practices
 
 ### Marketplaces & Registries
 - [SkillsMP](https://skillsmp.com/) - ⭐ **71,000+ skills with AI semantic search** (LARGEST marketplace)
