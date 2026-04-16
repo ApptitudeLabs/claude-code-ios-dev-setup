@@ -2399,6 +2399,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 
 ### Claude Code Configuration
 - [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) - ⭐ **Complete all-in-one configuration from Anthropic hackathon winner**
+- [Trail of Bits Claude Code Config](https://github.com/trailofbits/claude-code-config) - Production-grade `settings.json`, CLAUDE.md template, hook examples for blocking dangerous patterns, and sandboxing strategies from a leading security firm
 - [Agents Plugin System](https://github.com/wshobson/agents) - Modular plugin system for Claude Code
 - [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
 
