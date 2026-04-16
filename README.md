@@ -2325,6 +2325,28 @@ rtk proxy <cmd>       # Run a command unfiltered (debug/bypass)
 - ✅ **Significant savings**: 60–90% reduction on verbose commands (build logs, git output, test results)
 - ✅ **Rust-based**: Fast, low-overhead binary with no Node.js dependency
 
+### tokensave — Semantic Code Intelligence
+
+**Source:** [aovestdipaperino/tokensave](https://github.com/aovestdipaperino/tokensave)
+
+tokensave is a local-first semantic code intelligence system (Rust) that builds a knowledge graph from your codebase so agents can query structured symbol relationships instead of repeatedly grepping files — fewer tool calls, fewer tokens.
+
+**Why use this:**
+- ✅ **Fewer tool calls**: Agents query a pre-built knowledge graph instead of scanning files on every request
+- ✅ **Local-first**: Knowledge graph stays on your machine — no data leaves your environment
+- ✅ **Rust-based**: Fast, low-overhead indexing with no runtime dependency
+
+### Code Review Graph — PR Dependency Visualizer
+
+**Source:** [tirth8205/code-review-graph](https://github.com/tirth8205/code-review-graph)
+
+Code Review Graph visualizes code review workflows as dependency graphs, helping you understand review bottlenecks and PR relationships across your codebase.
+
+**Why use this:**
+- ✅ **Bottleneck detection**: Spot which PRs are blocking others at a glance
+- ✅ **PR relationships**: Understand dependencies between open pull requests
+- ✅ **Python-based**: Easy to run locally with no heavy runtime required
+
 ---
 
 ## 17. Complete Project Structure
