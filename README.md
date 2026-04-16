@@ -2631,5 +2631,5 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 
 ---
 
-*Last Updated: January 2026*  
-*Claude Code Version: 2.1.7*
+*Last Updated: April 2026*  
+*Claude Code Version: 2.1.92*
