@@ -2401,14 +2401,10 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 
 ### Marketplaces & Registries
 - [SkillsMP](https://skillsmp.com/) - ⭐ **71,000+ skills with AI semantic search** (LARGEST marketplace)
+- [agentskills.so](https://agentskills.so/) - Curated agent skills marketplace with category browsing and community contributions
+- [agent-skills.md](https://agent-skills.md/) - 69,000+ skills, actively maintained, searchable by technology (Swift, SwiftUI, iOS)
 - [Skills.sh](https://skills.sh/) - Official Vercel package manager for AI agent skills
-- [AI Templates](https://www.aitmpl.com/agents) - Visual browser for Claude Code templates
-- [Agent Skills Registry](https://agent-skills.md/) - Community skill marketplace with search
-- [Skill Creator AI](https://www.skillcreator.ai/explore) - AI-powered skill discovery and exploration
-- [Awesome Skills](https://awesomeskill.ai/) - Open directory of Claude Code, Codex, and ChatGPT agent skills with featured/latest collections and GitHub-linked SKILL.md downloads
-- [Claude Code Templates](https://github.com/davila7/claude-code-templates) - Template repository (GitHub)
-- [Ai-Agent-Skills](https://github.com/skillcreatorai/Ai-Agent-Skills) - Curated skills repository (GitHub)
-- [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) - Official Vercel skills (React/Next.js focused)
+- [AI Templates](https://www.aitmpl.com/agents) - Visual browser for Claude Code templates — browse before downloading
 
 ### Xcode & Development Workflow
 - [Claude Code in Xcode 26.3 — Agentic Coding Codex](https://www.swiftjectivec.com/agentic-coding-codex-claude-code-in-xcode/) - Practical guide to running Claude Code inside Xcode, covering the agentic workflow, prompt patterns, and tips for iOS-native development
