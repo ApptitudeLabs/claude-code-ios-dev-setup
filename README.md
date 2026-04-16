@@ -182,14 +182,6 @@ claude mcp add --transport stdio xcode -- xcrun mcpbridge
 # Version Control
 claude mcp add github -- npx -y @modelcontextprotocol/server-github
 
-# Memory & Context (Choose one)
-claude mcp add memory -- npx -y @modelcontextprotocol/server-memory
-# OR for advanced memory features:
-# claude mcp add memory-keeper -- npx -y mcp-memory-keeper
-
-# History
-claude mcp add claude-historian-mcp -- npx claude-historian-mcp
-
 # Verify
 claude mcp list
 
@@ -199,8 +191,7 @@ echo "Note: Configuration stored in ~/.claude.json"
 echo "For team projects, consider creating a .mcp.json file instead"
 echo ""
 echo "Optional servers for advanced use cases:"
-echo "  - Filesystem: Advanced file operations"
-echo "  - Sequential Thinking: Complex reasoning"
+echo "  - Sosumi: Apple developer documentation lookup"
 ```
 
 ### Optional MCP Servers
@@ -208,11 +199,6 @@ echo "  - Sequential Thinking: Complex reasoning"
 These are useful for specific scenarios but not required for iOS development:
 
 ```bash
-# Filesystem - Advanced file operations (useful for complex refactoring)
-claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem
-
-# Sequential Thinking - Complex multi-step reasoning
-claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
 
 # Sosumi - Apple developer documentation (Swift, SwiftUI, Xcode, etc.)
 claude mcp add --transport http sosumi https://sosumi.ai/mcp
@@ -361,82 +347,6 @@ claude mcp add github -- npx -y @modelcontextprotocol/server-github
 /mcp
 # Select GitHub → Authenticate → Complete OAuth flow
 ```
-
-### Memory MCP
-
-**Installation:**
-```bash
-claude mcp add memory -- npx -y @modelcontextprotocol/server-memory
-```
-
-**Capabilities:**
-- Persistent context across sessions
-- Remember project-specific decisions
-- Store architectural choices
-- Maintain conversation history
-
-**Usage:**
-```
-> Remember that we use MVVM with @Observable for this project
-> What architecture pattern did we decide on?
-> Store this: We always use Swift 6 strict concurrency
-```
-
-> **Note:** For more advanced memory and history tracking, see **Claude Historian MCP** below, which provides conversation history search and timeline features.
-
-### Claude Historian MCP
-
-**Installation:**
-```bash
-claude mcp add claude-historian-mcp -- npx claude-historian-mcp
-```
-
-**Capabilities:**
-- Track full conversation history
-- Reference past decisions and implementations
-- Search through previous sessions
-- Maintain project timeline
-
-**Usage:**
-```
-> What did we discuss about the networking layer last week?
-> Show me the history of authentication implementation decisions
-```
-
-### Filesystem MCP (Optional)
-
-**Installation:**
-```bash
-claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem
-```
-
-**Capabilities:**
-- Advanced file operations
-- Directory watching
-- Glob pattern matching
-- Batch file operations
-
-**Use Cases for iOS:**
-- Complex project-wide refactoring
-- Batch file renaming/reorganization
-- Advanced search patterns across codebase
-
-### Sequential Thinking MCP (Optional)
-
-**Installation:**
-```bash
-claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
-```
-
-**Capabilities:**
-- Multi-step reasoning
-- Complex problem decomposition
-- Chain-of-thought processing
-
-**Use Cases for iOS:**
-- Complex architectural decisions
-- Multi-step migration planning
-- Algorithm design and optimization
 
 ### MCP Server Configuration
 
