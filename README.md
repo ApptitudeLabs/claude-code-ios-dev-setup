@@ -557,8 +557,6 @@ npx skills add https://github.com/twostraws/SwiftUI-Agent-Skill
 npx skills add https://github.com/nexus-labs-automation/mobile-observability
 npx skills add https://github.com/numman-ali/n-skills
 
-# Optional: OpenSkills CLI for additional skill management
-npx skills add https://github.com/numman-ali/openskills
 ```
 
 **Alternative: Manual Git Clone**
@@ -579,7 +577,6 @@ git clone https://github.com/Dimillian/Skills.git dimillian-skills
 git clone https://github.com/twostraws/SwiftUI-Agent-Skill.git swiftui-pro
 git clone https://github.com/nexus-labs-automation/mobile-observability.git mobile-observability
 git clone https://github.com/numman-ali/n-skills.git n-skills
-git clone https://github.com/numman-ali/openskills.git openskills
 
 echo "✅ All skills installed!"
 ```
@@ -913,29 +910,6 @@ Skills from n-skills activate automatically based on context, or you can referen
 > Apply the n-skills testing strategy to this ViewModel
 ```
 
-### OpenSkills CLI
-
-**Source:** [numman-ali/openskills](https://github.com/numman-ali/openskills)
-
-**Installation:**
-```bash
-# Recommended
-npx skills add https://github.com/numman-ali/openskills
-
-# Or manual
-cd ~/.claude/skills/
-git clone https://github.com/numman-ali/openskills.git openskills
-```
-
-**What it is:**
-OpenSkills is a CLI-based skill management system that closely matches Claude Code's skills format. It uses the same prompt structure, marketplace approach, and folder organization, but operates via command-line interface rather than being built into tools.
-
-**Capabilities:**
-- Skill discovery and installation via CLI
-- Compatible skill format with Claude Code
-- Community-driven skill marketplace
-- Easy skill sharing and distribution
-
 ### Agents Plugin System
 
 **Source:** [wshobson/agents](https://github.com/wshobson/agents)
@@ -1058,14 +1032,7 @@ npx skills add https://github.com/numman-ali/n-skills
 # Short syntax also available:
 npx skills i https://github.com/author/skill-name
 
-# Method 2: OpenSkills CLI
-# Community-driven CLI-based skill management
-# Compatible with Claude Code's skills format
-cd ~/.claude/skills/
-git clone https://github.com/numman-ali/openskills.git
-# Follow OpenSkills CLI instructions for skill discovery and management
-
-# Method 3: Manual Git Clone (Full Control)
+# Method 2: Manual Git Clone (Full Control)
 # For those who prefer manual management
 cd ~/.claude/skills/
 git clone https://github.com/AvdLee/Swift-Concurrency-Agent-Skill.git swift-concurrency
@@ -1169,7 +1136,6 @@ Create `CLAUDE.md` in your project root:
 - **Dimillian's SwiftUI Components**: Reusable UI patterns
 - **Mobile Observability**: Analytics, crash reporting, monitoring
 - **n-skills**: Production-ready patterns and workflows
-- **OpenSkills**: Best practices and community standards
 
 ## Build Commands
 - Build: `mcp__xcodebuildmcp__build_sim_name_proj`
@@ -2515,7 +2481,6 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) - ⭐ **Complete all-in-one configuration from Anthropic hackathon winner**
 - [Agents Plugin System](https://github.com/wshobson/agents) - Modular plugin system for Claude Code
 - [n-skills - Production Skills](https://github.com/numman-ali/n-skills) - Curated production-ready agent skills
-- [OpenSkills - CLI Tool](https://github.com/numman-ali/openskills) - CLI for managing skills
 
 ### Token & Context Optimization
 - [RTK — Rust Token Killer](https://github.com/rtk-ai/rtk) - Transparent CLI proxy that reduces context usage by 60–90% by filtering noise from `git`, `swift build`, and other verbose commands before Claude sees the output
@@ -2566,7 +2531,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Thomas Ricouard (Dimillian)](https://github.com/Dimillian) for Skills Collection
 - [Nexus Labs](https://github.com/nexus-labs-automation) for Mobile Observability
 - [RTK team](https://github.com/rtk-ai) for RTK — Rust Token Killer
-- [Numan Ali](https://github.com/numman-ali) for n-skills and OpenSkills
+- [Numan Ali](https://github.com/numman-ali) for n-skills
 - [skillcreatorai](https://github.com/skillcreatorai) for Ai-Agent-Skills collection
 - [Carlos Davila](https://github.com/davila7) for Claude Code Templates
 - [Pol Piella](https://www.polpiella.dev) for EditorConfig Xcode guide
