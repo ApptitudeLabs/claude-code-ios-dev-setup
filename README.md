@@ -2143,6 +2143,38 @@ rtk proxy <cmd>       # Run a command unfiltered (debug/bypass)
 - ✅ **Significant savings**: 60–90% reduction on verbose commands (build logs, git output, test results)
 - ✅ **Rust-based**: Fast, low-overhead binary with no Node.js dependency
 
+### Caveman — Output Token Compression
+
+**Source:** [JuliusBrussee/caveman](https://github.com/juliusbrussee/caveman)
+
+Caveman is a skill that reduces AI output tokens by ~75% by making agents respond in terse, fragment-based prose — dropping articles, filler words, and pleasantries while preserving full technical accuracy. Responses are faster and cheaper with no loss of substance.
+
+**Installation (Claude Code):**
+```bash
+claude plugin marketplace add JuliusBrussee/caveman && claude plugin install caveman@caveman
+```
+
+**Intensity levels:**
+- `lite` — removes filler, keeps grammar
+- `full` — drops articles, uses fragments
+- `ultra` — telegraphic with abbreviations
+- `wenyan` — classical Chinese compression for extreme efficiency
+
+**Key commands:**
+```bash
+/caveman            # Activate caveman mode
+/caveman-commit     # Terse commit messages under 50 chars
+/caveman-review     # One-line code review comments
+/caveman-compress   # Compress memory files (~46% input token savings)
+/caveman-help       # Quick reference card
+# Deactivate: say "stop caveman"
+```
+
+**Why use this:**
+- ✅ **~75% fewer output tokens**: Cuts API costs and speeds up responses (~3x faster generation)
+- ✅ **Technically accurate**: All critical information preserved, just without the fluff
+- ✅ **Multi-agent**: Works with Claude Code, Cursor, Windsurf, Cline, Gemini CLI, and Codex
+
 ### tokensave — Semantic Code Intelligence
 
 **Source:** [aovestdipaperino/tokensave](https://github.com/aovestdipaperino/tokensave)
@@ -2395,6 +2427,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 
 ### Token & Context Optimization
 - [RTK — Rust Token Killer](https://github.com/rtk-ai/rtk) - Transparent CLI proxy that reduces context usage by 60–90% by filtering noise from `git`, `swift build`, and other verbose commands before Claude sees the output
+- [Caveman](https://github.com/juliusbrussee/caveman) - Output token compression skill (~75% reduction) that makes AI agents respond in terse, fragment-based prose — faster responses, lower costs, full technical accuracy
 - [tokensave](https://github.com/aovestdipaperino/tokensave) - Local-first semantic code intelligence system (Rust) that builds a knowledge graph from your codebase so agents can query structured symbol relationships instead of repeatedly grepping files — fewer tool calls, fewer tokens
 - [Code Review Graph](https://github.com/tirth8205/code-review-graph) - Visualizes code review workflows as dependency graphs, helping you understand review bottlenecks and PR relationships across your codebase
 - [Memvid](https://github.com/memvid/memvid) - Encodes large knowledge bases (docs, codebases, notes) into video files for ultra-compact, fast-retrieval AI memory — useful for giving Claude persistent context across long projects without hitting token limits
@@ -2438,6 +2471,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Thomas Ricouard (Dimillian)](https://github.com/Dimillian) for Skills Collection
 - [Nexus Labs](https://github.com/nexus-labs-automation) for Mobile Observability
 - [RTK team](https://github.com/rtk-ai) for RTK — Rust Token Killer
+- [Julius Brussee](https://github.com/juliusbrussee) for Caveman
 - [Numan Ali](https://github.com/numman-ali) for n-skills
 - [skillcreatorai](https://github.com/skillcreatorai) for Ai-Agent-Skills collection
 - [Carlos Davila](https://github.com/davila7) for Claude Code Templates
