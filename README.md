@@ -1,12 +1,20 @@
-# Claude Code CLI - Complete iOS Development Setup Guide
+# Claude Code for iOS Development
 
-> A comprehensive guide for setting up Claude Code CLI with PRD-driven workflows, extended thinking (ultrathink), planning modes, community agent skills, essential MCP servers, and Xcode optimizations for professional Swift/SwiftUI iOS development.
+[![Stars](https://img.shields.io/github/stars/seifscape/claude-code-ios-dev-setup?style=flat&color=yellow)](https://github.com/seifscape/claude-code-ios-dev-setup/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/seifscape/claude-code-ios-dev-setup?color=green)](https://github.com/seifscape/claude-code-ios-dev-setup/commits)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20macOS-lightgrey)](https://developer.apple.com)
+[![Swift](https://img.shields.io/badge/Swift-5.9%2B-orange?logo=swift&logoColor=white)](https://swift.org)
+
+**The definitive setup guide for using Claude Code on iOS projects.** Covers everything from first install to PRD-driven SwiftUI development — Axiom skills, XcodeBuildMCP, extended thinking, hooks, token optimization, and production-ready workflows for Swift/SwiftUI engineers.
+
+> Built for iOS engineers who want Claude Code working at full capacity in their Xcode workflow — not a generic AI guide with iOS sprinkled in.
 
 ---
 
 ## Quick Start
 
-New here? Do these four things and you'll have a solid iOS setup in under 10 minutes.
+Four steps. Under 10 minutes. Full iOS setup.
 
 **1. Install Claude Code**
 ```bash
@@ -30,9 +38,9 @@ claude "Create a CLAUDE.md for this iOS project"
 claude mcp add xcodebuildmcp -- npx -y xcodebuildmcp
 ```
 
-That's it. Claude will now automatically invoke the right iOS skill based on what you're working on — build failures, SwiftUI issues, accessibility audits, and more.
+Claude will now automatically invoke the right iOS skill for what you're working on — build failures, SwiftUI issues, Core Data migrations, accessibility audits, and more.
 
-> **Going deeper?** The full guide below covers PRD-driven workflows, extended thinking, hooks, token optimization, and everything else. Use the Table of Contents to jump to what you need.
+> **Going deeper?** The full guide covers PRD-driven workflows, extended thinking, hooks, token optimization, and everything else. Use the Table of Contents to jump to what you need.
 
 ---
 
