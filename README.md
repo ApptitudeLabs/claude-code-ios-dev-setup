@@ -2246,6 +2246,39 @@ Code Review Graph visualizes code review workflows as dependency graphs, helping
 - ✅ **PR relationships**: Understand dependencies between open pull requests
 - ✅ **Python-based**: Easy to run locally with no heavy runtime required
 
+### Memvid — Video-Based AI Memory
+
+**Source:** [memvid/memvid](https://github.com/memvid/memvid)
+
+Memvid encodes large knowledge bases — documentation, codebases, notes — into MP4 video files and retrieves relevant chunks via semantic search in milliseconds. The trick: video codecs compress repetitive text far more efficiently than gzip, so a 100 MB codebase becomes a few MB of MP4 that travels with your project and loads instantly.
+
+**Installation:**
+```bash
+pip install memvid
+```
+
+**Basic usage:**
+```python
+from memvid import MemvidEncoder, MemvidChat
+
+# Build memory from your project docs / codebase
+encoder = MemvidEncoder()
+encoder.add_directory("docs/")
+encoder.add_directory("Sources/")
+encoder.build_video("project_memory.mp4", "project_memory.json")
+
+# Chat with the memory in Claude sessions
+chat = MemvidChat("project_memory.mp4", "project_memory.json")
+chat.start_session()
+response = chat.chat("What does the authentication module do?")
+```
+
+**Why use this:**
+- ✅ **Ultra-compact storage**: MP4 compression shrinks large knowledge bases by 10–50x vs. plain text
+- ✅ **Millisecond retrieval**: Semantic search finds relevant chunks without loading the full corpus into context
+- ✅ **Persistent across sessions**: Memory file travels with the project — no re-indexing between Claude Code sessions
+- ✅ **No external service**: Runs fully local, no API keys or cloud dependency
+
 ---
 
 ## 17. Complete Project Structure
