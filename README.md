@@ -2175,6 +2175,47 @@ claude plugin marketplace add JuliusBrussee/caveman && claude plugin install cav
 - ✅ **Technically accurate**: All critical information preserved, just without the fluff
 - ✅ **Multi-agent**: Works with Claude Code, Cursor, Windsurf, Cline, Gemini CLI, and Codex
 
+### context-mode — MCP Context Sandbox
+
+**Source:** [mksglu/context-mode](https://github.com/mksglu/context-mode)
+
+context-mode is an MCP server that attacks the context window problem from three angles: it sandboxes raw tool output so it never lands in context (315 KB → 5.4 KB, ~98% reduction), tracks session state in SQLite with FTS5 search so compaction doesn't lose in-progress work, and enforces a "think in code" paradigm where the agent writes scripts to process data rather than reading files into context.
+
+**Installation (Claude Code):**
+```bash
+/plugin marketplace add mksglu/context-mode
+/plugin install context-mode@context-mode
+```
+
+**Key commands:**
+```bash
+/context-mode:ctx-stats    # Per-tool context savings breakdown
+/context-mode:ctx-doctor   # Diagnostics — hooks, FTS5, runtimes
+/context-mode:ctx-insight  # Session continuity summary
+```
+
+**Why use this:**
+- ✅ **~98% tool output reduction**: Sandbox tools keep raw MCP data (Playwright snapshots, GitHub issues, logs) out of context
+- ✅ **Session continuity**: SQLite + FTS5 tracks every file edit and task so compaction doesn't cause amnesia
+- ✅ **Think in Code**: Agent writes scripts to analyze data instead of reading 50 files into context — 100x token savings on analysis tasks
+
+### claude-token-efficient — Drop-in CLAUDE.md for Terse Responses
+
+**Source:** [drona23/claude-token-efficient](https://github.com/drona23/claude-token-efficient)
+
+A single CLAUDE.md file you drop into any project. It eliminates the default Claude verbosity patterns — filler openers ("Sure!", "Absolutely!"), unsolicited suggestions, restated questions, over-engineered code — replacing them with direct, minimal responses. No tooling, no code changes, no setup beyond dropping one file.
+
+**Installation:**
+```bash
+# Download and drop into your project root
+curl -O https://raw.githubusercontent.com/drona23/claude-token-efficient/main/CLAUDE.md
+```
+
+**Why use this:**
+- ✅ **Zero setup**: One file, works immediately on every session in that project
+- ✅ **Reduces output verbosity**: Strips filler, restated questions, unsolicited suggestions, and over-engineering
+- ✅ **Honest trade-off**: File adds input tokens each turn — net positive only when output volume is high enough to offset; not worth it for short one-off sessions
+
 ### tokensave — Semantic Code Intelligence
 
 **Source:** [aovestdipaperino/tokensave](https://github.com/aovestdipaperino/tokensave)
@@ -2428,6 +2469,8 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 ### Token & Context Optimization
 - [RTK — Rust Token Killer](https://github.com/rtk-ai/rtk) - Transparent CLI proxy that reduces context usage by 60–90% by filtering noise from `git`, `swift build`, and other verbose commands before Claude sees the output
 - [Caveman](https://github.com/juliusbrussee/caveman) - Output token compression skill (~75% reduction) that makes AI agents respond in terse, fragment-based prose — faster responses, lower costs, full technical accuracy
+- [context-mode](https://github.com/mksglu/context-mode) - MCP server that sandboxes tool output (~98% reduction), tracks session state in SQLite for compaction-proof continuity, and enforces a "think in code" paradigm to minimize context usage across 12 platforms
+- [claude-token-efficient](https://github.com/drona23/claude-token-efficient) - Drop-in CLAUDE.md that eliminates default Claude verbosity (filler openers, restated questions, unsolicited suggestions) for terse, direct responses — zero setup, works on any project
 - [tokensave](https://github.com/aovestdipaperino/tokensave) - Local-first semantic code intelligence system (Rust) that builds a knowledge graph from your codebase so agents can query structured symbol relationships instead of repeatedly grepping files — fewer tool calls, fewer tokens
 - [Code Review Graph](https://github.com/tirth8205/code-review-graph) - Visualizes code review workflows as dependency graphs, helping you understand review bottlenecks and PR relationships across your codebase
 - [Memvid](https://github.com/memvid/memvid) - Encodes large knowledge bases (docs, codebases, notes) into video files for ultra-compact, fast-retrieval AI memory — useful for giving Claude persistent context across long projects without hitting token limits
