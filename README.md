@@ -10,6 +10,8 @@
 
 > Built for iOS engineers who want Claude Code working at full capacity in their Xcode workflow — not a generic AI guide with iOS sprinkled in.
 
+> **Going further with agents?** Blake Crosley's [iOS Agent Development Guide](https://blakecrosley.com/guides/ios-agent-development) is a great companion — covers building iOS agents end-to-end.
+
 ---
 
 ## Quick Start
