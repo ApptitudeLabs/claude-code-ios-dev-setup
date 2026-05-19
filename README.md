@@ -2248,6 +2248,38 @@ Code Review Graph visualizes code review workflows as dependency graphs, helping
 - ✅ **PR relationships**: Understand dependencies between open pull requests
 - ✅ **Python-based**: Easy to run locally with no heavy runtime required
 
+### AgentMemory — Persistent Semantic Memory for AI Agents
+
+**Source:** [rohitg00/agentmemory](https://github.com/rohitg00/agentmemory)
+
+AgentMemory gives Claude and other AI agents a persistent, searchable long-term memory layer backed by ChromaDB. Instead of re-injecting full context into every session, agents store and retrieve memories semantically — only pulling in what's relevant to the current task. Supports tiered memory (short-term, long-term, archival), automatic summarization, and a simple Python API.
+
+**Installation:**
+```bash
+pip install agentmemory
+```
+
+**Basic usage:**
+```python
+from agentmemory import create_memory, get_memories, search_memory
+
+# Store something Claude learned about your project
+create_memory("architecture", "The app uses MVVM with Combine for reactive bindings in all feature modules.")
+
+# Later — retrieve relevant memories before starting a new session
+memories = search_memory("architecture patterns", n_results=5)
+for m in memories:
+    print(m["document"])
+```
+
+**Why use this:**
+- ✅ **Semantic retrieval**: Finds relevant past context without exact-match queries
+- ✅ **Tiered storage**: Short-term, long-term, and archival tiers with automatic promotion/summarization
+- ✅ **Local & private**: Runs on ChromaDB — no cloud, no API keys
+- ✅ **Drop-in for agentic workflows**: Works alongside Claude Code's built-in memory for richer cross-session continuity
+
+---
+
 ### Memvid — Video-Based AI Memory
 
 **Source:** [memvid/memvid](https://github.com/memvid/memvid)
@@ -2516,6 +2548,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [claude-token-efficient](https://github.com/drona23/claude-token-efficient) - Drop-in CLAUDE.md that eliminates default Claude verbosity (filler openers, restated questions, unsolicited suggestions) for terse, direct responses — zero setup, works on any project
 - [tokensave](https://github.com/aovestdipaperino/tokensave) - Local-first semantic code intelligence system (Rust) that builds a knowledge graph from your codebase so agents can query structured symbol relationships instead of repeatedly grepping files — fewer tool calls, fewer tokens
 - [Code Review Graph](https://github.com/tirth8205/code-review-graph) - Visualizes code review workflows as dependency graphs, helping you understand review bottlenecks and PR relationships across your codebase
+- [AgentMemory](https://github.com/rohitg00/agentmemory) - Persistent, semantic long-term memory layer for AI agents backed by ChromaDB — store and retrieve project context across sessions with automatic tiering and summarization, no cloud required
 - [Memvid](https://github.com/memvid/memvid) - Encodes large knowledge bases (docs, codebases, notes) into video files for ultra-compact, fast-retrieval AI memory — useful for giving Claude persistent context across long projects without hitting token limits
 
 ### Marketplaces & Registries
