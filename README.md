@@ -2531,6 +2531,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [AvdLee's SwiftUI Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill) - Modern SwiftUI patterns and best practices
 - [AvdLee's Core Data Skill](https://github.com/AvdLee/Core-Data-Agent-Skill) - Core Data stack setup, migrations, and CloudKit sync
 - [AvdLee's Xcode Build Optimization Skill](https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill) - Diagnose and fix slow Xcode build times
+- [Addy Osmani's Agent Skills](https://github.com/addyosmani/agent-skills) - Agent skills collection by Google's Principal Engineer, covering web performance, development workflows, and cross-platform tooling
 - [Dimillian's Skills Collection](https://github.com/Dimillian/Skills)
 - [Nexus Labs Mobile Observability](https://github.com/nexus-labs-automation/mobile-observability)
 - [Trail of Bits Skills](https://github.com/trailofbits/skills) - Security-focused agent skills from the renowned security research firm, covering vulnerability analysis, secure code review, threat modeling, and cryptography best practices
