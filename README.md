@@ -563,6 +563,7 @@ If you prefer to pick and choose specific skills rather than the all-in-one solu
 # Install iOS development skills — prompts you to choose global or project scope
 
 # Core iOS Skills
+npx skills add https://github.com/charleswiltgen/Axiom
 npx skills add https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
 npx skills add https://github.com/AvdLee/SwiftUI-Agent-Skill
 npx skills add https://github.com/AvdLee/Core-Data-Agent-Skill
