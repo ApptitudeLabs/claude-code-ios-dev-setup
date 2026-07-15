@@ -202,6 +202,7 @@ echo "For team projects, consider creating a .mcp.json file instead"
 echo ""
 echo "Optional servers for advanced use cases:"
 echo "  - Sosumi: Apple developer documentation lookup"
+echo "  - Cupertino: Local Apple docs CLI & MCP (offline, deterministic search)"
 ```
 
 ### Optional MCP Servers
@@ -212,15 +213,21 @@ These are useful for specific scenarios but not required for iOS development:
 
 # Sosumi - Apple developer documentation (Swift, SwiftUI, Xcode, etc.)
 claude mcp add --transport http sosumi https://sosumi.ai/mcp
+
+# Cupertino - Local, offline Apple docs CLI & MCP server
+brew tap cupertinohq/tap https://codeberg.org/CupertinoHQ/homebrew-tap.git
+brew install cupertinohq/tap/cupertino
+cupertino setup
+claude mcp add cupertino --scope user -- $(which cupertino)
 ```
 
-### Sosumi - Apple Docs CLI & MCP
+### Sosumi & Cupertino - Apple Docs CLI & MCP
 
-**Source:** [sosumi.ai](https://sosumi.ai/)
+Two interchangeable options for Apple developer documentation lookup from your terminal or via MCP. Ideal for looking up Swift APIs, SwiftUI modifiers, and framework references without leaving Claude Code.
 
-Sosumi provides instant access to Apple developer documentation directly from your terminal or via MCP. Ideal for looking up Swift APIs, SwiftUI modifiers, and framework references without leaving Claude Code.
+**Sosumi** — **Source:** [sosumi.ai](https://sosumi.ai/)
 
-**CLI Usage:**
+Sosumi provides instant access to Apple developer documentation via a hosted HTTP endpoint.
 
 ```bash
 # One-off lookup
@@ -229,15 +236,28 @@ npx @nshipster/sosumi fetch /documentation/swift/array
 # If you use it regularly, install it once:
 npm i -g @nshipster/sosumi
 sosumi fetch /documentation/swiftui/text
-```
 
-**MCP Installation:**
-
-```bash
+# MCP Installation
 claude mcp add --transport http sosumi https://sosumi.ai/mcp
 ```
 
-**Verify:**
+**Cupertino** — **Source:** [codeberg.org/CupertinoHQ/cupertino](https://codeberg.org/CupertinoHQ/cupertino) (moved from GitHub to Codeberg as of v1.4.2 — see [why Cupertino moved to Codeberg](https://aleahim.com/blog/cupertino-moved-to-codeberg/))
+
+Cupertino indexes Apple Developer documentation, Swift Evolution proposals, Swift.org content, the Human Interface Guidelines, and Apple sample code into local SQLite databases — roughly 363K docs pages across 417 frameworks and 308K indexed symbols. Unlike Sosumi's hosted HTTP endpoint, Cupertino runs fully offline with BM25F full-text search (sub-100ms queries), which makes lookups deterministic and reproducible without a network round-trip.
+
+```bash
+# Installation
+brew tap cupertinohq/tap https://codeberg.org/CupertinoHQ/homebrew-tap.git
+brew install cupertinohq/tap/cupertino
+cupertino setup
+
+# MCP Installation
+claude mcp add cupertino --scope user -- $(which cupertino)
+```
+
+> **Note:** If upgrading from the old `mihaelamj/tap` GitHub-hosted tap, migrate with `brew uninstall mihaelamj/tap/cupertino || true && brew untap mihaelamj/tap || true` after tapping the new Codeberg source — existing databases remain compatible.
+
+**Verify either:**
 
 ```bash
 claude mcp list
@@ -2520,6 +2540,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 
 ### Apple Developer Resources
 - [Sosumi](https://sosumi.ai/) - Apple developer docs CLI & MCP (`npm i -g @nshipster/sosumi`)
+- [Cupertino](https://codeberg.org/CupertinoHQ/cupertino) - Local, offline Apple docs CLI & MCP (`brew install cupertinohq/tap/cupertino`)
 - [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
 - [Swift Evolution Proposals](https://github.com/apple/swift-evolution)
 - [SwiftUI Documentation](https://developer.apple.com/documentation/swiftui)
