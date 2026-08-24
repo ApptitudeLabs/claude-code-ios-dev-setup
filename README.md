@@ -2336,6 +2336,38 @@ response = chat.chat("What does the authentication module do?")
 
 ---
 
+### Deja-Vu — Searchable Memory of Everything Your Agents Have Done
+
+**Source:** [vshulcz/deja-vu](https://github.com/vshulcz/deja-vu)
+
+Deja-Vu indexes the conversation history of 20+ coding agents (Claude Code, Cursor, Codex, Cline, aider, Gemini CLI, opencode, and more) into a single local search index, so an agent can look up how a problem was solved before instead of re-solving it. It's a single Go binary using BM25 over an inverted index — no LLM calls, no embedding API, no cloud. Roughly 160 MB of index covers 5+ GB of history, with sub-millisecond lookups.
+
+**Installation:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/vshulcz/deja-vu/main/install.sh | sh
+deja install --auto
+
+# or via Homebrew
+brew install vshulcz/tap/deja-vu
+```
+
+**Basic usage:**
+```bash
+deja "SwiftData migration crash"        # Search all indexed agent history
+deja ctx "navigation coordinator"       # Markdown digest to paste into a session
+deja blame Sources/Auth/TokenStore.swift # Every past discussion touching this file
+deja fix "Unable to simultaneously satisfy constraints"  # Prior fixes for this error
+```
+
+**Why use this:**
+- ✅ **Cross-agent recall**: Finds the fix regardless of which agent originally worked it out
+- ✅ **Auto-recall on session start**: `deja install --auto` seeds new sessions with relevant prior context
+- ✅ **Fast and dependency-free**: Local Go binary, BM25 ranking, no API keys or embedding service
+- ✅ **Credential redaction**: Secrets are stripped at index time before anything hits disk
+- ✅ **File-level history**: `deja blame` surfaces past reasoning about a specific file — useful when returning to old iOS modules
+
+---
+
 ## 17. Complete Project Structure
 
 ```
@@ -2573,6 +2605,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Code Review Graph](https://github.com/tirth8205/code-review-graph) - Visualizes code review workflows as dependency graphs, helping you understand review bottlenecks and PR relationships across your codebase
 - [AgentMemory](https://github.com/rohitg00/agentmemory) - Persistent, semantic long-term memory layer for AI agents backed by ChromaDB — store and retrieve project context across sessions with automatic tiering and summarization, no cloud required
 - [Memvid](https://github.com/memvid/memvid) - Encodes large knowledge bases (docs, codebases, notes) into video files for ultra-compact, fast-retrieval AI memory — useful for giving Claude persistent context across long projects without hitting token limits
+- [Deja-Vu](https://github.com/vshulcz/deja-vu) - Local Go binary that indexes conversation history from 20+ coding agents (Claude Code, Cursor, Codex, aider…) into a BM25 search index — retroactive search, `deja fix` for past error solutions, `deja blame` for per-file history, with credential redaction and no external APIs
 
 ### Marketplaces & Registries
 - [SkillsMP](https://skillsmp.com/) - ⭐ **71,000+ skills with AI semantic search** (LARGEST marketplace)
