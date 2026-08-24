@@ -219,7 +219,23 @@ brew tap cupertinohq/tap https://codeberg.org/CupertinoHQ/homebrew-tap.git
 brew install cupertinohq/tap/cupertino
 cupertino setup
 claude mcp add cupertino --scope user -- $(which cupertino)
+
+# Obscura - Headless browser for AI agents & web scraping (Rust, Apache-2.0)
+# Apple Silicon build; swap for obscura-x86_64-macos.tar.gz on Intel
+curl -LO https://github.com/h4ckf0r0day/obscura/releases/latest/download/obscura-aarch64-macos.tar.gz
+tar xzf obscura-aarch64-macos.tar.gz && sudo mv obscura /usr/local/bin/
+claude mcp add obscura --scope user -- obscura mcp
 ```
+
+**Why an iOS developer might want Obscura:** a real browser engine (V8 + Chrome DevTools Protocol)
+that acts as a drop-in replacement for headless Chrome under Puppeteer/Playwright, but boots a fresh
+sandboxed session in under 50ms with no shared cookies between runs. Useful for scraping App Store
+Connect pages that have no API, checking your marketing site or web views, and harvesting docs that
+Sosumi/Cupertino don't cover. Its MCP server exposes `browser_navigate`, `browser_snapshot`,
+`browser_click`, `browser_fill`, `browser_evaluate`, `browser_network_requests`, and
+`browser_console_messages` — snapshot-based rather than screenshot-based, so it costs far fewer
+tokens than driving a full Chrome instance. Note that the hosted **Obscura Cloud** is a commercial
+offering; the open-source engine is Apache-2.0 with full features.
 
 ### Sosumi & Cupertino - Apple Docs CLI & MCP
 
@@ -2605,6 +2621,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Code Review Graph](https://github.com/tirth8205/code-review-graph) - Visualizes code review workflows as dependency graphs, helping you understand review bottlenecks and PR relationships across your codebase
 - [AgentMemory](https://github.com/rohitg00/agentmemory) - Persistent, semantic long-term memory layer for AI agents backed by ChromaDB — store and retrieve project context across sessions with automatic tiering and summarization, no cloud required
 - [Memvid](https://github.com/memvid/memvid) - Encodes large knowledge bases (docs, codebases, notes) into video files for ultra-compact, fast-retrieval AI memory — useful for giving Claude persistent context across long projects without hitting token limits
+- [Obscura](https://github.com/h4ckf0r0day/obscura) - Rust headless browser for AI agents and scraping — real V8 + CDP, drop-in for headless Chrome under Puppeteer/Playwright, <50ms sandboxed sessions, with an MCP server whose snapshot-based tools cost far fewer tokens than driving full Chrome
 - [Deja-Vu](https://github.com/vshulcz/deja-vu) - Local Go binary that indexes conversation history from 20+ coding agents (Claude Code, Cursor, Codex, aider…) into a BM25 search index — retroactive search, `deja fix` for past error solutions, `deja blame` for per-file history, with credential redaction and no external APIs
 
 ### Marketplaces & Registries
