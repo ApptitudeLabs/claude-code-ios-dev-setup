@@ -225,6 +225,12 @@ claude mcp add cupertino --scope user -- $(which cupertino)
 curl -LO https://github.com/h4ckf0r0day/obscura/releases/latest/download/obscura-aarch64-macos.tar.gz
 tar xzf obscura-aarch64-macos.tar.gz && sudo mv obscura /usr/local/bin/
 claude mcp add obscura --scope user -- obscura mcp
+
+# CVE MCP Server - Security intelligence (NVD, EPSS, CISA KEV, MITRE ATT&CK, Shodan, VirusTotal)
+git clone https://github.com/mukul975/cve-mcp-server.git ~/tools/cve-mcp-server
+cd ~/tools/cve-mcp-server && uv venv && source .venv/bin/activate && uv pip install -e .
+cp .env.example .env   # add optional API keys (NVD, Shodan, VirusTotal, ...)
+claude mcp add cve-mcp --scope user -- ~/tools/cve-mcp-server/.venv/bin/python -m cve_mcp.server
 ```
 
 **Why an iOS developer might want Obscura:** a real browser engine (V8 + Chrome DevTools Protocol)
@@ -236,6 +242,22 @@ Sosumi/Cupertino don't cover. Its MCP server exposes `browser_navigate`, `browse
 `browser_console_messages` — snapshot-based rather than screenshot-based, so it costs far fewer
 tokens than driving a full Chrome instance. Note that the hosted **Obscura Cloud** is a commercial
 offering; the open-source engine is Apache-2.0 with full features.
+
+### CVE MCP Server - Security Intelligence for Dependency Triage
+
+**Source:** [mukul975/cve-mcp-server](https://github.com/mukul975/cve-mcp-server)
+
+A production-grade MCP server (Python, FastMCP, Apache-2.0) that gives Claude 28 security tools across 24 data sources — NVD, EPSS exploitation probability, CISA KEV, OSV.dev, GitHub GHSA, MITRE ATT&CK, Shodan, VirusTotal, GreyNoise, and more. The headline tool is `triage_cve`, a one-call orchestrator that fans out to every relevant source in parallel, computes a composite risk score with a CISA KEV hard override, and returns a prioritized patch recommendation with evidence.
+
+**Why an iOS developer might want it:** your app ships a dependency graph — SPM packages, CocoaPods, vendored C libraries, backend SDKs — and "should we ship this release or patch first?" is otherwise a day of tab-juggling. With this server you can ask Claude directly:
+
+```text
+Triage CVE-2024-3400 for us — are we actually exposed?
+Any known-exploited CVEs in these SPM dependencies? (paste Package.resolved)
+Explain this CVSS vector and what an attacker needs to reach it.
+```
+
+Most core tools (NVD, EPSS, CISA KEV, OSV, CWE) work with **no API key**; keys for NVD, Shodan, and VirusTotal raise rate limits and unlock the network/threat-intel tools. All traffic is outbound HTTPS only, keys are read from environment variables and never logged, and private/internal IPs are blocked from lookup tools.
 
 ### Sosumi & Cupertino - Apple Docs CLI & MCP
 
@@ -2384,6 +2406,89 @@ deja fix "Unable to simultaneously satisfy constraints"  # Prior fixes for this 
 
 ---
 
+### LLM Wiki - A Knowledge Base That Builds Itself
+
+**Source:** [nashsu/llm_wiki](https://github.com/nashsu/llm_wiki)
+
+LLM Wiki is a cross-platform desktop app (Tauri + Rust) that turns your documents into an organized, interlinked wiki — automatically. Rather than classic RAG (re-derive an answer from chunks on every query), an LLM **incrementally compiles and maintains a persistent wiki** from your sources, based on [Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). The wiki directory is plain Markdown with YAML frontmatter and `[[wikilinks]]` — it opens as an Obsidian vault.
+
+**Installation:**
+```bash
+# Pre-built .dmg (Apple Silicon + Intel)
+# https://github.com/nashsu/llm_wiki/releases
+
+# Agent skill so Claude Code can query your wiki
+npx skills add https://github.com/nashsu/llm_wiki_skill.git --skill llm-wiki
+```
+
+It ships a local HTTP API at `http://127.0.0.1:19828` (token-protected, loopback-only) plus a bundled MCP server exposing hybrid search, file read, graph traversal, and source rescan.
+
+**Why an iOS developer might want this:**
+- ✅ **Compile the docs once**: ingest WWDC transcripts, framework PDFs, HIG excerpts, and internal design docs into a wiki Claude can cite by page path
+- ✅ **Team/project knowledge**: PRDs, architecture decisions, and postmortems become a linked graph instead of a folder of stale Markdown
+- ✅ **Read Sources Only mode**: answers grounded strictly in your imported material — no invented API signatures
+- ✅ **Obsidian-compatible**: the generated wiki is just Markdown on disk, so it survives the tool
+- ✅ **Local-first**: point it at any OpenAI-compatible endpoint, including a local model served by oMLX (below)
+
+---
+
+### oMLX - Local LLM Inference Server for Apple Silicon
+
+**Source:** [jundot/omlx](https://github.com/jundot/omlx)
+
+oMLX is an MLX-based LLM inference server for Apple Silicon with continuous batching and tiered KV caching (hot in-memory + cold SSD), managed from the macOS menu bar. It serves an OpenAI-compatible API at `http://localhost:8000/v1`, auto-discovering LLMs, VLMs, embedding models, and rerankers from a model directory. Apache-2.0; requires macOS 15+ and Python 3.11–3.13.
+
+**Installation:**
+```bash
+# Homebrew
+brew tap jundot/omlx https://github.com/jundot/omlx
+brew install jundot/omlx/omlx
+
+# Optional MCP support
+/opt/homebrew/opt/omlx/libexec/bin/pip install mcp
+
+# Run as a background service (auto-restarts on crash)
+omlx start
+omlx stop
+omlx restart
+
+# Or foreground, with an explicit model directory
+omlx serve --model-dir ~/models
+```
+
+A `.dmg` with in-app auto-update and precompiled Metal custom kernels is available from [Releases](https://github.com/jundot/omlx/releases) — the recommended route unless you have full Xcode installed for the Metal toolchain.
+
+**Why an iOS developer might want this:**
+- ✅ **SSD-tiered KV cache**: past context stays cached and reusable across requests, which is what makes local models practical for real coding sessions
+- ✅ **Claude Code optimization**: scales reported token counts so auto-compact triggers correctly with smaller-context models, and SSE keep-alive prevents read timeouts during long prefill
+- ✅ **Runs on the Mac you already build on**: no cloud round-trip for local classification, embedding, or draft-generation tasks
+- ✅ **OpenAI-compatible**: point LLM Wiki, embeddings pipelines, or your own app's dev harness at it unchanged
+- ✅ **Offline and private**: proprietary source and unreleased app code never leave the machine
+
+---
+
+### Soup - Fine-Tune Local Models from One YAML
+
+**Source:** [MakazhanAlpamys/Soup](https://github.com/MakazhanAlpamys/Soup)
+
+Soup is a CLI for fine-tuning and post-training LLMs from a single YAML config — LoRA/QLoRA, SFT and DPO, GGUF/Ollama export, with batch size, GPU detection, and quantization auto-detected. Its layer-streaming mode keeps the frozen base out of VRAM and feeds it one decoder layer at a time, making an 8B fine-tune fit on a 4 GB laptop GPU (measured 3.32 GB peak on an RTX 3050). Apache-2.0, Python 3.10–3.12.
+
+**Installation:**
+```bash
+pip install "soup-cli[train]"   # bare `soup-cli` is the light CLI, no training deps
+soup init --template chat
+soup train
+```
+
+**Why an iOS developer might want this:**
+- ✅ **Domain-tuned local models**: train a small model on your own Swift codebase, style guide, or ticket history, then serve it through oMLX
+- ✅ **One config, reproducible**: the YAML is the whole run — commit it next to the project
+- ✅ **Export to where you serve**: GGUF/Ollama export means the tuned model drops into an existing local stack
+- ✅ **No cloud, no SSH**: training stays on hardware you control, which matters for proprietary code
+- ⚠️ **Note**: training itself is CUDA-oriented — Apple Silicon support exists but is thinner; a Linux/NVIDIA box (or a rented GPU) is the practical path, with the Mac serving inference via oMLX
+
+---
+
 ## 17. Complete Project Structure
 
 ```
@@ -2623,6 +2728,12 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Memvid](https://github.com/memvid/memvid) - Encodes large knowledge bases (docs, codebases, notes) into video files for ultra-compact, fast-retrieval AI memory — useful for giving Claude persistent context across long projects without hitting token limits
 - [Obscura](https://github.com/h4ckf0r0day/obscura) - Rust headless browser for AI agents and scraping — real V8 + CDP, drop-in for headless Chrome under Puppeteer/Playwright, <50ms sandboxed sessions, with an MCP server whose snapshot-based tools cost far fewer tokens than driving full Chrome
 - [Deja-Vu](https://github.com/vshulcz/deja-vu) - Local Go binary that indexes conversation history from 20+ coding agents (Claude Code, Cursor, Codex, aider…) into a BM25 search index — retroactive search, `deja fix` for past error solutions, `deja blame` for per-file history, with credential redaction and no external APIs
+- [LLM Wiki](https://github.com/nashsu/llm_wiki) - Desktop app that incrementally compiles your documents into a persistent, interlinked Markdown wiki (Obsidian-compatible) instead of re-deriving answers via RAG — ships a local HTTP API, MCP server, and a Claude Code [agent skill](https://github.com/nashsu/llm_wiki_skill)
+
+### Local LLM & Security Tooling
+- [oMLX](https://github.com/jundot/omlx) - MLX inference server for Apple Silicon with continuous batching and tiered in-memory/SSD KV caching, managed from the macOS menu bar — OpenAI-compatible API with Claude Code context scaling
+- [Soup](https://github.com/MakazhanAlpamys/Soup) - Fine-tune and post-train LLMs from one YAML (LoRA/QLoRA, SFT/DPO, GGUF export); layer streaming trains an 8B model on a 4 GB GPU
+- [CVE MCP Server](https://github.com/mukul975/cve-mcp-server) - 28 security tools across 24 APIs (NVD, EPSS, CISA KEV, OSV, MITRE ATT&CK, Shodan, VirusTotal) with a one-call `triage_cve` orchestrator for dependency vulnerability triage
 
 ### Marketplaces & Registries
 - [SkillsMP](https://skillsmp.com/) - ⭐ **71,000+ skills with AI semantic search** (LARGEST marketplace)
