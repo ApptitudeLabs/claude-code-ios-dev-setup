@@ -388,6 +388,70 @@ claude mcp add --transport stdio xcode -- xcrun mcpbridge
 
 > **Recommendation:** Start with **XcodeBuildMCP** for comprehensive iOS development. Add **mcpbridge** (`xcrun mcpbridge`) for Apple-native Xcode IDE access — they complement each other well.
 
+### Simulator Automation CLIs - AXe, Baguette & idb
+
+`xcrun simctl` can boot devices and install apps, but it can't tap, swipe, or read what's on screen. These CLIs fill that gap and give Claude eyes and hands on the Simulator, so it can verify UI changes itself instead of asking you to check.
+
+**AXe** — **Source:** [github.com/cameroncooke/AXe](https://github.com/cameroncooke/AXe)
+
+A lightweight CLI that drives the Simulator through Apple's accessibility and HID APIs. It powers XcodeBuildMCP's UI automation and pairs with the `axiom-axe-ref` skill.
+
+```bash
+# Installation
+brew install cameroncooke/axe/axe
+
+# Usage
+axe list-simulators
+axe describe-ui --udid "$UDID"               # Accessibility tree as JSON
+axe tap --label "Continue" --udid "$UDID"
+axe type 'Hello world' --udid "$UDID"
+axe screenshot --output ./screen.png --udid "$UDID"
+```
+
+**Baguette** — **Source:** [github.com/tddworks/baguette](https://github.com/tddworks/baguette) · [Docs](https://tddworks.github.io/baguette/)
+
+A Swift CLI with a built-in web UI that controls simulators without opening Xcode or Simulator.app. It supports 60 fps screen streaming, multi-finger and system gestures, hardware buttons, log tailing, Mac webcam passthrough into the camera APIs, and a multi-device farm dashboard. Requires Apple Silicon, macOS 15+, and Xcode 26+.
+
+```bash
+# Installation (use native arm64 Homebrew)
+brew install baguette
+
+# Usage
+baguette serve                                 # Web UI (farm dashboard at /farm)
+baguette list
+baguette boot --udid <UDID>
+baguette tap --udid <UDID> --x 219 --y 478 --width 438 --height 954
+baguette screenshot --udid <UDID> --size appstore-6.9 -o hero.png
+baguette record --udid <UDID> --size square --duration 10 --output demo.mp4
+```
+
+**idb (iOS Development Bridge)** — **Source:** [github.com/facebook/idb](https://github.com/facebook/idb) · [Docs](https://fbidb.io/)
+
+Meta's automation bridge for simulators **and physical devices**. It has two parts: a companion installed with Homebrew and a Python client (Python 3.10+).
+
+```bash
+# Installation
+brew install facebook/fb/idb
+pip3 install fb-idb
+
+# Usage
+idb list-targets
+idb list-apps --udid <UDID>
+idb launch com.apple.mobilesafari
+idb ui describe-all --udid <UDID>
+```
+
+**When to use which:**
+
+| Tool | Best for |
+|------|----------|
+| `xcrun simctl` | Boot, install, launch, push notifications, and location, with nothing to install |
+| **AXe** | Agent-driven UI checks: tap by label, read the accessibility tree, take screenshots |
+| **Baguette** | Streaming, complex gestures, camera input, App Store–sized captures, device farms |
+| **idb** | Automating physical devices, or existing idb-based pipelines |
+
+> **Recommendation:** Start with **AXe**. It's the lightest option and already works with XcodeBuildMCP. Add **Baguette** when you need streaming or rich gestures, and **idb** when you need physical devices.
+
 ### GitHub MCP
 
 **Installation:**
@@ -1813,6 +1877,17 @@ EditorConfig works alongside:
 - ^ + ⌘ + ↑: Switch between .swift and Test file
 - ⌘ + K: Clear Console
 
+**Hidden Defaults (Terminal):**
+```bash
+# Show build duration in the activity bar ("Build Succeeded | 12.3s")
+defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
+
+# Back up your current Xcode defaults before tweaking
+defaults read com.apple.dt.Xcode > ~/Desktop/XcodeDefaults.plist
+```
+
+Restart Xcode for the changes to apply. For more options, see [macos-defaults.com/xcode](https://macos-defaults.com/xcode/showbuildoperationduration.html) and [ApptitudeLabs/xcode-defaults](https://github.com/ApptitudeLabs/xcode-defaults). Some entries there date back to older Xcode versions, so check each one before applying it.
+
 ### SwiftLint Configuration
 
 Create `.swiftlint.yml` with Swift 6 optimizations:
@@ -2745,6 +2820,11 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 ### Xcode & Development Workflow
 - [Claude Code in Xcode 26.3 — Agentic Coding Codex](https://www.swiftjectivec.com/agentic-coding-codex-claude-code-in-xcode/) - Practical guide to running Claude Code inside Xcode, covering the agentic workflow, prompt patterns, and tips for iOS-native development
 - [Claude Code LSP Integration](https://karanbansal.in/blog/claude-code-lsp/) - How to wire Claude Code into the Language Server Protocol for richer in-editor intelligence, diagnostics, and code actions
+- [AXe](https://github.com/cameroncooke/AXe) - Accessibility-based CLI for iOS Simulator UI automation (tap, type, describe UI, screenshots)
+- [Baguette](https://github.com/tddworks/baguette) - Controls simulators without Xcode or Simulator.app, with 60 fps streaming, multi-finger gestures, and a device farm
+- [idb](https://github.com/facebook/idb) - Meta's iOS Development Bridge for automating simulators and physical devices
+- [xcode-defaults](https://github.com/ApptitudeLabs/xcode-defaults) - Collection of useful hidden Xcode `defaults` settings
+- [macos-defaults: Xcode](https://macos-defaults.com/xcode/showbuildoperationduration.html) - Documented Xcode defaults, including build duration display
 - [Make Xcode Great Again](https://khorbushko.github.io/article/2021/02/01/make-xCode-great-again.html) - Xcode performance optimization
 - [Xcode EditorConfig Setup](https://www.polpiella.dev/xcode-editor-config/) - Consistent formatting with EditorConfig
 - [Xcode and Git: Bridging the Gap](https://thoughtbot.com/blog/xcode-and-git-bridging-the-gap) - Git integration best practices for Xcode projects
