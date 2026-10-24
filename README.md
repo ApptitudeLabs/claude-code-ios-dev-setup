@@ -792,6 +792,29 @@ $swiftui-pro   # In Codex
 - ✅ **Complements AvdLee SwiftUI Skill**: Different lens — where AvdLee is broad, this is opinionated about correctness
 - ✅ **Part of a Suite**: Pairs with SwiftData Pro, Swift Concurrency Pro, and Swift Testing Pro skills
 
+### Ponytail — Lazy Senior Dev Mode
+
+**Source:** [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)
+
+A Claude Code plugin that makes the agent write the smallest complete change: skip unrequested features, reuse what the codebase and standard library already provide, and leave a test for risky logic. It reports what it skipped at the end of each reply. The project's own benchmarks claim roughly half the code and fewer tokens versus the same agent without it.
+
+**Installation:**
+```
+/plugin marketplace add DietrichGebert/ponytail
+/plugin install ponytail@ponytail
+```
+
+**Invocation:**
+```
+/ponytail lite|full|ultra   # Switch level (full is the default)
+stop ponytail               # Turn it off for the session
+```
+
+**Why use this:**
+- ✅ **Smaller diffs**: Fewer abstractions, options, and "for later" code to review
+- ✅ **Tests on risky logic**: New non-trivial logic ships with a small check
+- ✅ **Honest handoff**: Each reply ends with what was skipped or not verified
+
 ### Core Data Agent Skill
 
 **Source:** [AvdLee/Core-Data-Agent-Skill](https://github.com/AvdLee/Core-Data-Agent-Skill)
@@ -2803,6 +2826,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Memvid](https://github.com/memvid/memvid) - Encodes large knowledge bases (docs, codebases, notes) into video files for ultra-compact, fast-retrieval AI memory — useful for giving Claude persistent context across long projects without hitting token limits
 - [Obscura](https://github.com/h4ckf0r0day/obscura) - Rust headless browser for AI agents and scraping — real V8 + CDP, drop-in for headless Chrome under Puppeteer/Playwright, <50ms sandboxed sessions, with an MCP server whose snapshot-based tools cost far fewer tokens than driving full Chrome
 - [Deja-Vu](https://github.com/vshulcz/deja-vu) - Local Go binary that indexes conversation history from 20+ coding agents (Claude Code, Cursor, Codex, aider…) into a BM25 search index — retroactive search, `deja fix` for past error solutions, `deja blame` for per-file history, with credential redaction and no external APIs
+- [Ponytail](https://github.com/DietrichGebert/ponytail) - Claude Code plugin that forces the simplest complete change: reuse existing code and stdlib, no unrequested abstractions, and a test for risky logic
 - [LLM Wiki](https://github.com/nashsu/llm_wiki) - Desktop app that incrementally compiles your documents into a persistent, interlinked Markdown wiki (Obsidian-compatible) instead of re-deriving answers via RAG — ships a local HTTP API, MCP server, and a Claude Code [agent skill](https://github.com/nashsu/llm_wiki_skill)
 
 ### Local LLM & Security Tooling
