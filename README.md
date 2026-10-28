@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20macOS-lightgrey)](https://developer.apple.com)
 [![Swift](https://img.shields.io/badge/Swift-5.9%2B-orange?logo=swift&logoColor=white)](https://swift.org)
 
-**The definitive setup guide for using Claude Code on iOS projects.** Covers everything from first install to PRD-driven SwiftUI development — Axiom skills, XcodeBuildMCP, extended thinking, hooks, token optimization, and production-ready workflows for Swift/SwiftUI engineers.
+**The definitive setup guide for using Claude Code on iOS projects.** Covers everything from first install to PRD-driven SwiftUI development — Axiom skills, MobileBuildMCP, extended thinking, hooks, token optimization, and production-ready workflows for Swift/SwiftUI engineers.
 
 > Built for iOS engineers who want Claude Code working at full capacity in their Xcode workflow — not a generic AI guide with iOS sprinkled in.
 
@@ -35,9 +35,9 @@ cd ~/path/to/YourApp
 claude "Create a CLAUDE.md for this iOS project"
 ```
 
-**4. Install XcodeBuildMCP** — lets Claude build, run, and debug in Xcode directly
+**4. Install MobileBuildMCP** — lets Claude build, run, and debug in Xcode directly
 ```bash
-claude mcp add xcodebuildmcp -- npx -y xcodebuildmcp
+claude mcp add xcodebuildmcp -- npx -y mobilebuildmcp@latest mcp
 ```
 
 Claude will now automatically invoke the right iOS skill for what you're working on — build failures, SwiftUI issues, Core Data migrations, accessibility audits, and more.
@@ -180,8 +180,8 @@ Priority (Highest to Lowest):
 echo "🚀 Installing Essential MCP Servers..."
 
 # Core iOS Development - Choose one or combine:
-# Option 1: XcodeBuildMCP (Recommended - Full featured build pipeline)
-npx -y @smithery/cli@latest install cameroncooke/xcodebuildmcp --client claude-code
+# Option 1: MobileBuildMCP (Recommended - Full featured build pipeline)
+claude mcp add xcodebuildmcp -- npx -y mobilebuildmcp@latest mcp
 
 # Option 2: mcpbridge (Apple-native, ships with Xcode - zero external deps)
 claude mcp add --transport stdio xcode -- xcrun mcpbridge
@@ -307,17 +307,19 @@ claude mcp list
 
 There are three main MCP servers for Xcode integration. Choose based on your needs:
 
-#### XcodeBuildMCP (Recommended for Full Build Pipeline)
+#### MobileBuildMCP (Recommended for Full Build Pipeline)
 
-**Source:** [cameroncooke/xcodebuildmcp](https://github.com/cameroncooke/XcodeBuildMCP)
+**Source:** [getsentry/MobileBuildMCP](https://github.com/getsentry/MobileBuildMCP) (formerly XcodeBuildMCP by Cameron Cooke)
 
 **Installation:**
 ```bash
-# Via Smithery (Recommended)
-npx -y @smithery/cli@latest install cameroncooke/xcodebuildmcp --client claude-code
+# npx (no install)
+claude mcp add xcodebuildmcp -- npx -y mobilebuildmcp@latest mcp
 
-# Or manual
-claude mcp add xcodebuild -- npx cameroncooke/xcodebuildmcp
+# Or install globally via Homebrew / npm
+brew tap getsentry/xcodebuildmcp && brew install mobilebuildmcp
+npm install -g mobilebuildmcp@latest
+claude mcp add xcodebuildmcp -- mobilebuildmcp mcp
 ```
 
 **Best for:**
@@ -358,7 +360,7 @@ claude mcp add xc-mcp -- npx -y xc-mcp
 - Lightweight Xcode project interaction
 - Quick builds without full pipeline
 - Simpler setup for smaller projects
-- Alternative to XcodeBuildMCP
+- Alternative to MobileBuildMCP
 
 #### mcpbridge (Apple's Native Xcode MCP Bridge)
 
@@ -373,20 +375,20 @@ claude mcp add --transport stdio xcode -- xcrun mcpbridge
 - Deep Xcode IDE integration via Apple's own tooling
 - Access to Xcode-internal APIs not exposed by third-party servers
 - Zero-dependency setup (ships with Xcode — just `xcrun` it)
-- Pairing with XcodeBuildMCP for maximum coverage
+- Pairing with MobileBuildMCP for maximum coverage
 
 **Why use this:**
 - No npm, no Node.js, no external processes — just Xcode
 - Apple-maintained, so it tracks new Xcode capabilities automatically
-- Complements XcodeBuildMCP: use both for full build pipeline + deep IDE access
+- Complements MobileBuildMCP: use both for full build pipeline + deep IDE access
 
 **When to use which:**
-- **Use XcodeBuildMCP** for production projects with full CI/CD needs
+- **Use MobileBuildMCP** for production projects with full CI/CD needs
 - **Use mcpbridge** for deep Xcode IDE integration with zero external dependencies
 - **Use xc-mcp** for a lightweight third-party alternative
-- **Combine XcodeBuildMCP + mcpbridge** for the most complete Xcode integration
+- **Combine MobileBuildMCP + mcpbridge** for the most complete Xcode integration
 
-> **Recommendation:** Start with **XcodeBuildMCP** for comprehensive iOS development. Add **mcpbridge** (`xcrun mcpbridge`) for Apple-native Xcode IDE access — they complement each other well.
+> **Recommendation:** Start with **MobileBuildMCP** for comprehensive iOS development. Add **mcpbridge** (`xcrun mcpbridge`) for Apple-native Xcode IDE access — they complement each other well.
 
 ### Simulator Automation CLIs - AXe, Baguette & idb
 
@@ -394,7 +396,7 @@ claude mcp add --transport stdio xcode -- xcrun mcpbridge
 
 **AXe** — **Source:** [github.com/cameroncooke/AXe](https://github.com/cameroncooke/AXe)
 
-A lightweight CLI that drives the Simulator through Apple's accessibility and HID APIs. It powers XcodeBuildMCP's UI automation and pairs with the `axiom-axe-ref` skill.
+A lightweight CLI that drives the Simulator through Apple's accessibility and HID APIs. It powers MobileBuildMCP's UI automation and pairs with the `axiom-axe-ref` skill.
 
 ```bash
 # Installation
@@ -450,7 +452,7 @@ idb ui describe-all --udid <UDID>
 | **Baguette** | Streaming, complex gestures, camera input, App Store–sized captures, device farms |
 | **idb** | Automating physical devices, or existing idb-based pipelines |
 
-> **Recommendation:** Start with **AXe**. It's the lightest option and already works with XcodeBuildMCP. Add **Baguette** when you need streaming or rich gestures, and **idb** when you need physical devices.
+> **Recommendation:** Start with **AXe**. It's the lightest option and already works with MobileBuildMCP. Add **Baguette** when you need streaming or rich gestures, and **idb** when you need physical devices.
 
 ### GitHub MCP
 
@@ -493,7 +495,7 @@ MCP servers are automatically configured when you install them using `claude mcp
         "xcodebuildmcp": {
           "type": "stdio",
           "command": "npx",
-          "args": ["-y", "@smithery/cli@latest", "run", "cameroncooke/xcodebuildmcp"]
+          "args": ["-y", "mobilebuildmcp@latest", "mcp"]
         },
         "github": {
           "type": "stdio",
@@ -512,7 +514,7 @@ MCP servers are automatically configured when you install them using `claude mcp
   "mcpServers": {
     "XcodeBuildMCP": {
       "command": "npx",
-      "args": ["-y", "xcodebuildmcp@latest"],
+      "args": ["-y", "mobilebuildmcp@latest", "mcp"],
       "env": {
         "INCREMENTAL_BUILDS_ENABLED": "true",
         "XCODEBUILDMCP_SENTRY_DISABLED": "true",
@@ -891,7 +893,7 @@ Claude automatically uses this skill when:
 **Why use this:**
 - ✅ **Expert Knowledge**: Built by Antoine van der Lee (SwiftLee), prolific iOS build tooling contributor
 - ✅ **Practical Focus**: Real-world build time wins, not theoretical advice
-- ✅ **Pairs Well**: Complements XcodeBuildMCP for a full build optimization workflow
+- ✅ **Pairs Well**: Complements MobileBuildMCP for a full build optimization workflow
 
 ### Dimillian's Skills Collection
 
@@ -910,7 +912,7 @@ npx skills add https://github.com/Dimillian/Skills
 |---|---|
 | **App Store Changelog** | Transforms git history since last tag into user-facing "What's New" release notes |
 | **GitHub** | Operates on issues, PRs, and workflow runs using the `gh` CLI |
-| **iOS Debugger Agent** | Builds, launches, and debugs iOS apps on simulators using XcodeBuildMCP tools |
+| **iOS Debugger Agent** | Builds, launches, and debugs iOS apps on simulators using MobileBuildMCP tools |
 | **macOS Menubar Tuist App** | Handles menubar app development with Tuist and SwiftUI |
 | **macOS SwiftPM App Packaging** | Scaffolds and packages macOS apps without Xcode |
 | **Orchestrate Batch Refactor** | Plans and executes large-scale refactoring across a codebase |
@@ -1192,7 +1194,7 @@ Create `CLAUDE.md` in your project root:
 
 ## MCP Integration
 **IMPORTANT**: This project uses the following MCP servers:
-- **XcodeBuildMCP**: All Xcode build/test/simulator operations
+- **MobileBuildMCP**: All Xcode build/test/simulator operations
 - **GitHub**: Repository and issue management (@github:repo://owner/repo)
 - **Memory**: Persistent context across sessions
 - **Historian**: Conversation history and past decisions
@@ -1546,7 +1548,7 @@ allowed-tools: mcp__xcodebuildmcp__*
 
 Detect the project type and build appropriately:
 1. Check for .xcworkspace or .xcodeproj
-2. Use XcodeBuildMCP to build for iOS Simulator
+2. Use MobileBuildMCP to build for iOS Simulator
 3. Report any build errors with suggested fixes
 ```
 
@@ -2684,7 +2686,7 @@ This helps prevent merge conflicts in Xcode project files.
    - Skills activate automatically
 
 4. **Use MCP Servers Effectively**
-   - XcodeBuildMCP for all Xcode operations
+   - MobileBuildMCP for all Xcode operations
    - GitHub MCP for issue/PR management
    - Memory MCP for cross-session context
 
@@ -2696,7 +2698,7 @@ This helps prevent merge conflicts in Xcode project files.
 Use Swift Concurrency skill best practices. Create a task breakdown."
 
 # Debugging with logs
-"The app crashes when logging in. Capture logs with XcodeBuildMCP and 
+"The app crashes when logging in. Capture logs with MobileBuildMCP and 
 ultrathink to identify the root cause. Check for concurrency issues."
 
 # Using GitHub integration
@@ -2784,7 +2786,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 
 ### Official Documentation
 - [Claude Code Official Docs](https://code.claude.com/docs)
-- [XcodeBuildMCP GitHub](https://github.com/cameroncooke/XcodeBuildMCP)
+- [MobileBuildMCP GitHub](https://github.com/getsentry/MobileBuildMCP)
 - [mcpbridge](https://developer.apple.com/xcode/) - Apple's native Xcode MCP bridge, ships with Xcode (`xcrun mcpbridge`)
 - [xc-mcp GitHub](https://github.com/conorluddy/xc-mcp)
 - [MCP Documentation](https://modelcontextprotocol.io)
@@ -2872,7 +2874,7 @@ Just like `docs/PRD.md` documents the requirements that drive development, `Lear
 - [Affaan Mustafa](https://github.com/affaan-m) for Everything Claude Code - comprehensive configuration collection
 - [Vercel](https://vercel.com) for Skills.sh and agent skills ecosystem
 - [Apple](https://developer.apple.com) for mcpbridge — native Xcode MCP bridge
-- [Cameron Cooke](https://github.com/cameroncooke) for XcodeBuildMCP
+- [Cameron Cooke](https://github.com/cameroncooke) for creating XcodeBuildMCP (now MobileBuildMCP)
 - [Conor Luddy](https://github.com/conorluddy) for xc-mcp
 - [Antoine van der Lee](https://github.com/AvdLee) for Swift Concurrency, SwiftUI, Core Data, and Xcode Build Optimization Skills
 - [Thomas Ricouard (Dimillian)](https://github.com/Dimillian) for Skills Collection
